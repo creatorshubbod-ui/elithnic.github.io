@@ -1,20 +1,95 @@
 <!DOCTYPE html>
-<html><head><title>Admin</title><meta name="viewport" content="width=device-width,initial-scale=1">
-<style>body{background:#0b0f1a;color:#fff;font-family:system-ui;margin:0}header{background:#111827;padding:15px}.tabs{display:flex;gap:8px;padding:15px}.tab{padding:8px 15px;background:#1f2937;border-radius:6px;cursor:pointer}.tab.on{background:#7c3aed}.box{padding:0 15px}.card{background:#111827;padding:12px;margin:8px 0;border-radius:8px;display:flex;justify-content:space-between} button{background:#7c3aed;color:#fff;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;margin-left:5px} table{width:100%;border-collapse:collapse} th,td{padding:8px;border-bottom:1px solid #1f2937} th{color:#9ca3af}</style>
-</head><body>
-<header><h2>Admin Panel</h2></header>
-<div class="tabs"><div class="tab on" onclick="sw(0)">Applications</div><div class="tab" onclick="sw(1)">Closers</div><div class="tab" onclick="sw(2)">Leads</div><div class="tab" onclick="sw(3)">Withdrawals</div></div>
-<div class="box" id="b0"></div><div class="box" id="b1" style="display:none"></div><div class="box" id="b2" style="display:none"></div><div class="box" id="b3" style="display:none"></div>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elithnic Founder Dashboard</title>
+<style>
+:root{--bg:#0b0f1a;--accent:#7c3aed;--glass:rgba(255,255,255,.06);--border:rgba(255,255,255,.12);}
+*{box-sizing:border-box;margin:0}body{background:var(--bg);color:#fff;font-family:-apple-system,BlinkMacSystemFont,sans-serif;overflow-x:hidden}
+header{padding:20px;position:sticky;top:0;background:rgba(11,15,26,.8);backdrop-filter:blur(20px);z-index:10;border-bottom:1px solid var(--border)}
+h1{font-size:24px;background:linear-gradient(90deg,#fff,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;padding:20px}
+.card,.panel{background:var(--glass);border:1px solid var(--border);backdrop-filter:blur(20px);border-radius:20px;padding:20px;transition:.3s;animation:fade.5s}
+.card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(124,58,237,.2)}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;padding:0 20px 20px}
+.tab{background:#1c2333;color:#9ca3af;border:none;padding:12px 20px;border-radius:12px;cursor:pointer;transition:.2s}
+.tab.active{background:var(--accent);color:#fff;box-shadow:0 0 20px rgba(124,58,237,.4)}
+section{display:none;padding:0 20px 20px;animation:fade.4s}section.show{display:block}
+table{width:100%;border-collapse:collapse}th{color:#9ca3af;text-align:left;font-weight:500;padding:12px}td{padding:14px;border-top:1px solid rgba(255,255,255,.06)}
+input,select{width:100%;padding:12px;background:rgba(0,0,0,.3);color:#fff;border:1px solid var(--border);border-radius:12px;outline:none}
+input:focus{border-color:var(--accent)}
+button{background:var(--accent);color:#fff;border:none;padding:10px 16px;border-radius:10px;cursor:pointer;transition:.2s}
+button:hover{transform:scale(1.05)}
+.badge{padding:4px 10px;border-radius:20px;font-size:12px}.pending{background:rgba(251,191,36,.2);color:#fbbf24}.paid{background:rgba(16,185,129,.2);color:#10b981}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:15px}
+.search{margin:0 20px 20px;padding:12px 20px;background:var(--glass);border:1px solid var(--border);border-radius:14px;width:calc(100% - 40px);color:#fff}
+</style>
+</head>
+<body>
+<header><h1>Elithnic Founder Dashboard</h1></header>
+
+<div class="grid" id="kpis"></div>
+
+<div class="tabs">
+<button class="tab active" onclick="show('dashboard',this)">Dashboard</button>
+<button class="tab" onclick="show('closers',this)">Closers</button>
+<button class="tab" onclick="show('leads',this)">Leads</button>
+<button class="tab" onclick="show('payouts',this)">Payouts & Banking</button>
+<button class="tab" onclick="show('apps',this)">Applications</button>
+</div>
+
+<input class="search" id="search" placeholder="Search closer, client, phone..." oninput="render()">
+
+<section id="dashboard" class="show">
+<div class="panel"><h3>Founder Overview</h3><p style="color:#9ca3af;margin-top:8px">Real-time control of your entire closer team. All data stored locally.</p></div>
+</section>
+
+<section id="closers">
+<div class="panel"><h3>Add / Edit Closer</h3><div class="form">
+<input id="cname" placeholder="Full Name"><input id="cphone" placeholder="Phone">
+<input id="cbank" placeholder="Bank Name"><input id="cacc" placeholder="Account No">
+<input id="cifsc" placeholder="IFSC"><input id="cupi" placeholder="UPI ID">
+<input id="cpaypal" placeholder="PayPal Email"><button onclick="addCloser()">Save Closer</button>
+</div></div><br>
+<div class="panel"><table><thead><tr><th>Name</th><th>Phone</th><th>Bank</th><th>PayPal</th><th>Leads</th><th>Earning</th><th>Join</th></tr></thead><tbody id="closerRows"></tbody></table></div>
+</section>
+
+<section id="leads">
+<div class="panel"><h3>Add Lead Activity</h3><div class="form">
+<input id="lname" placeholder="Closer Name"><input id="client" placeholder="Client Name"><input id="cphone2" placeholder="Client Phone">
+<input id="service" placeholder="Service"><input id="amount" type="number" placeholder="Amount"><input id="comm" type="number" placeholder="Commission">
+<select id="status"><option>Pending</option><option>Delivered</option></select><button onclick="addLead()">Add Lead</button>
+</div></div><br>
+<div class="panel"><table><thead><tr><th>Date</th><th>Closer</th><th>Client</th><th>Phone</th><th>Service</th><th>Amount</th><th>Comm</th><th>Status</th></tr></thead><tbody id="leadRows"></tbody></table></div>
+</section>
+
+<section id="payouts">
+<div class="panel"><h3>Payout Requests</h3><table><thead><tr><th>Closer</th><th>Amount</th><th>Method</th><th>Bank/UPI/PayPal Details</th><th>Date</th><th>Status</th><th>Action</th></tr></thead><tbody id="payoutRows"></tbody></table></div>
+</section>
+
+<section id="apps">
+<div class="panel"><table><thead><tr><th>Name</th><th>Phone</th><th>Experience</th><th>Date</th><th>Action</th></tr></thead><tbody id="appRows"></tbody></table></div>
+</section>
+
 <script>
-function sw(n){document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('on',i===n));['b0','b1','b2','b3'].forEach((id,i)=>document.getElementById(id).style.display=i===n?'block':'none');ren();}
-function ren(){
- let a=JSON.parse(localStorage.getItem('closer_apps')||'[]');b0.innerHTML=a.length?a.map((x,i)=>`<div class="card"><div><b>${x.name}</b> - ${x.phone}</div><button onclick="ap(${i})">Approve</button></div>`).join(''):'No pending';
- let c=JSON.parse(localStorage.getItem('approved_closers')||'[{"name":"Closer 1"},{"name":"Closer 2"},{"name":"Closer 3"}]');b1.innerHTML=c.map(x=>{let l=JSON.parse(localStorage.getItem('leads_'+x.name)||'[]');return `<div class="card"><div>${x.name} - ${l.length} leads</div><div>₹${l.reduce((a,b)=>a+b.cm,0)}</div></div>`}).join('');
- let all=[];c.forEach(x=>{JSON.parse(localStorage.getItem('leads_'+x.name)||'[]').forEach(l=>all.push({...l,clsr:x.name}))});b2.innerHTML='<table><tr><th>Closer</th><th>Client</th><th>Service</th><th>Status</th><th></th></tr>'+all.map((x,i)=>`<tr><td>${x.clsr}</td><td>${x.cl}</td><td>${x.sr}</td><td>${x.st}</td><td>${x.st==='Pending'?`<button onclick="dl('${x.clsr}','${x.dt}')">Deliver</button>`:''}</td></tr>`).join('')+'</table>';
- let w=JSON.parse(localStorage.getItem('wdr')||'[]');b3.innerHTML=w.length?w.map((x,i)=>`<div class="card"><div><b>${x.c}</b> - ₹${x.amt}<br><small>${x.pay.method} - ${x.pay.acc||x.pay.pp||x.pay.ws||x.pay.tw}</small></div>${x.st==='Pending'?`<button onclick="py(${i})">Pay</button>`:`<span style="color:#10b981">Paid</span>`}</div>`).join(''):'No requests';
-}
-function ap(i){let a=JSON.parse(localStorage.getItem('closer_apps')||'[]');let x=a.splice(i,1)[0];localStorage.setItem('closer_apps',JSON.stringify(a));let c=JSON.parse(localStorage.getItem('approved_closers')||'[]');c.push({name:x.name});localStorage.setItem('approved_closers',JSON.stringify(c));alert(x.name+' approved, pass: 1234');ren();}
-function dl(cls,dt){let k='leads_'+cls;let l=JSON.parse(localStorage.getItem(k)||'[]');let f=l.find(x=>x.dt===dt&&x.st==='Pending');if(f){f.st='Delivered';f.cm=f.fc;localStorage.setItem(k,JSON.stringify(l));}ren();}
-function py(i){let w=JSON.parse(localStorage.getItem('wdr')||'[]');w[i].st='Paid';localStorage.setItem('wdr',JSON.stringify(w));let c=w[i].c;let l=JSON.parse(localStorage.getItem('leads_'+c)||'[]');l.forEach(x=>x.cm=0);localStorage.setItem('leads_'+c,JSON.stringify(l));ren();}
-ren();
-</script></body></html>
+const get=(k,d=[])=>JSON.parse(localStorage.getItem(k)||JSON.stringify(d)), set=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+function show(id,btn){document.querySelectorAll('section').forEach(s=>s.classList.remove('show'));document.getElementById(id).classList.add('show');document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active')}
+function addCloser(){let a=get('approved_closers');a.push({name:cname.value,phone:cphone.value,joinDate:new Date().toLocaleDateString(),bankDetails:{bank:cbank.value,acc:cacc.value,ifsc:cifsc.value,upi:cupi.value,paypal:cpaypal.value}});set('approved_closers',a);render();['cname','cphone','cbank','cacc','cifsc','cupi','cpaypal'].forEach(i=>document.getElementById(i).value='')}
+function addLead(){let k='leads_'+lname.value,a=get(k);a.push({date:new Date().toLocaleDateString(),clientName:client.value,phone:cphone2.value,service:service.value,amount:+amount.value,commission:+comm.value,status:status.value});set(k,a);render()}
+function approve(i){let apps=get('closer_apps'),a=apps.splice(i,1)[0];set('closer_apps',apps);let c=get('approved_closers');c.push({name:a.name,phone:a.phone,joinDate:a.date,bankDetails:{}});set('approved_closers',c);render()}
+function pay(i){let p=get('withdrawals');p[i].status='Paid';set('withdrawals',p);render()}
+function render(){let s=search.value.toLowerCase(),closers=get('approved_closers'),leads=[];closers.forEach(c=>get('leads_'+c.name).forEach(l=>leads.push({...l,closer:c.name,bank:c.bankDetails})));
+closerRows.innerHTML=closers.filter(c=>c.name.toLowerCase().includes(s)).map(c=>{let l=get('leads_'+c.name),e=l.reduce((a,b)=>a+b.commission,0);return `<tr><td>${c.name}</td><td>${c.phone}</td><td>${c.bankDetails.bank||''} ${c.bankDetails.acc||''}</td><td>${c.bankDetails.paypal||''}</td><td>${l.length}</td><td>₹${e}</td><td>${c.joinDate}</td></tr>`}).join('');
+leadRows.innerHTML=leads.filter(l=>l.closer.toLowerCase().includes(s)||l.clientName.toLowerCase().includes(s)).map(l=>`<tr><td>${l.date}</td><td>${l.closer}</td><td>${l.clientName}</td><td>${l.phone}</td><td>${l.service}</td><td>₹${l.amount}</td><td>₹${l.commission}</td><td><span class="badge ${l.status=='Pending'?'pending':'paid'}">${l.status}</span></td></tr>`).join('');
+let pays=get('withdrawals');payoutRows.innerHTML=pays.map((p,i)=>`<tr><td>${p.closer}</td><td>₹${p.amount}</td><td>${p.paymentMethod}</td><td>${p.paymentDetails.bank||''} ${p.paymentDetails.acc||''} ${p.paymentDetails.upi||''} ${p.paymentDetails.paypal||''}</td><td>${p.date}</td><td><span class="badge ${p.status=='Pending'?'pending':'paid'}">${p.status}</span></td><td>${p.status=='Pending'?`<button onclick="pay(${i})">Approve</button>`:''}</td></tr>`).join('');
+appRows.innerHTML=get('closer_apps').map((a,i)=>`<tr><td>${a.name}</td><td>${a.phone}</td><td>${a.experience}</td><td>${a.date}</td><td><button onclick="approve(${i})">Approve</button></td></tr>`).join('');
+let rev=leads.reduce((a,b)=>a+b.amount,0),pend=pays.filter(x=>x.status=='Pending').reduce((a,b)=>a+b.amount,0);
+kpis.innerHTML=[['Total Closers',closers.length],['Total Leads',leads.length],['Pending Payout','₹'+pend],['Revenue','₹'+rev]].map(x=>`<div class="card"><div style="color:#9ca3af">${x[0]}</div><div style="font-size:28px;font-weight:700;margin-top:8px">${x[1]}</div></div>`).join('')}
+// demo data
+if(!localStorage.getItem('approved_closers')){set('approved_closers',[{name:'Rahul Sharma',phone:'9876543210',joinDate:'10/06/2026',bankDetails:{bank:'HDFC',acc:'1234567890',ifsc:'HDFC0001',upi:'rahul@upi',paypal:'rahul@paypal.com'}}]);set('leads_Rahul Sharma',[{date:'12/06/2026',clientName:'Acme Corp',phone:'9998887770',service:'Website',amount:50000,commission:5000,status:'Delivered'}]);set('withdrawals',[{closer:'Rahul Sharma',amount:5000,date:'13/06/2026',paymentMethod:'Bank',paymentDetails:{bank:'HDFC',acc:'1234567890'},status:'Pending'}]);set('closer_apps',[{name:'Priya Singh',phone:'8887776665',experience:'2 years',date:'14/06/2026'}])}
+render();
+</script>
+</body>
+</html>
