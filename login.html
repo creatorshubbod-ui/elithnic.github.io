@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html>
-<head><title>Login</title><meta name="viewport" content="width=device-width, initial-scale=1">
-<style>body{background:#0b0f1a;color:#fff;font-family:system-ui;display:flex;align-items:center;justify-content:center;height:100vh}input,button{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #374151;background:#111827;color:#fff}button{background:#7c3aed;border:none;font-weight:600;cursor:pointer}.box{width:320px;padding:30px;background:#111827;border-radius:16px}</style>
-</head>
-<body>
+<html><head><title>Login</title><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>body{background:#0b0f1a;color:#fff;font-family:system-ui;display:flex;justify-content:center;align-items:center;height:100vh;margin:0}.box{background:#111827;padding:30px;border-radius:12px;width:320px;border:1px solid #1f2937}h2{margin-top:0;color:#7c3aed}input{width:100%;padding:12px;margin:8px 0;background:#0b0f1a;border:1px solid #374151;color:#fff;border-radius:6px;box-sizing:border-box}button{width:100%;padding:12px;background:#7c3aed;border:none;color:#fff;border-radius:6px;cursor:pointer;font-weight:600;margin-top:10px}button:hover{background:#6d28d9}#msg{margin-top:10px;font-size:14px}</style>
+</head><body>
 <div class="box">
-<h2>Closer Login</h2>
-<input id="user" placeholder="Name or Closer ID">
-<input id="pass" type="password" placeholder="Password (default: 1234)">
-<button onclick="login()">Login</button>
-<p id="err" style="color:#ef4444;font-size:14px"></p>
-<p style="font-size:12px;color:#9ca3af;margin-top:20px">New? <a href="apply.html" style="color:#7c3aed">Apply here</a></p>
+ <h2>Closer Login</h2>
+ <input id="u" placeholder="Username (e.g. Closer 1)">
+ <input id="p" type="password" placeholder="Password" value="1234">
+ <button onclick="go()">Login</button>
+ <div id="msg"></div>
+ <p style="font-size:12px;color:#9ca3af;margin-top:20px">Test: Closer 1 / 1234</p>
 </div>
 <script>
-function login(){
- const u=user.value.trim();
- let closers=JSON.parse(localStorage.getItem('approved_closers')||'[{"name":"Closer 1","pass":"1234"},{"name":"Closer 2","pass":"1234"},{"name":"Closer 3","pass":"1234"}]');
- let found=closers.find(c=>c.name.toLowerCase()===u.toLowerCase());
- if(found && pass.value===found.pass){
-   localStorage.setItem('current_closer',u);
-   location.href='dashboard.html';
- }else{err.innerText='Invalid or not approved yet';}
+function go(){
+ let u=document.getElementById('u').value.trim();
+ let p=document.getElementById('p').value;
+ if(!u){msg.innerHTML='<span style="color:#f59e0b">Enter username</span>';return;}
+ // check approved
+ let approved=JSON.parse(localStorage.getItem('approved_closers')||'[{"name":"Closer 1"},{"name":"Closer 2"},{"name":"Closer 3"}]');
+ let found=approved.find(x=>x.name.toLowerCase()===u.toLowerCase());
+ if(!found && p!=='1234'){msg.innerHTML='<span style="color:#ef4444">Not approved yet</span>';return;}
+ if(p!=='1234'){msg.innerHTML='<span style="color:#ef4444">Wrong password</span>';return;}
+ localStorage.setItem('current_closer',found?found.name:u);
+ msg.innerHTML='<span style="color:#10b981">Logging in...</span>';
+ setTimeout(()=>location.href='dashboard.html',500);
 }
-</script>
-</body>
-</html>
+document.getElementById('p').addEventListener('keypress',e=>{if(e.key==='Enter')go()});
+</script></body></html>
