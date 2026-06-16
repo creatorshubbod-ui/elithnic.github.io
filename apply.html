@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Apply - Creator's Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{background:#0b0f1a;color:#fff;font-family:system-ui;padding:40px;max-width:500px;margin:auto}input,textarea,select{width:100%;padding:12px;margin:8px 0;background:#111827;border:1px solid #374151;color:#fff;border-radius:8px}button{background:#7c3aed;color:#fff;padding:14px;border:none;border-radius:8px;width:100%;font-weight:600;cursor:pointer}button:hover{opacity:.9}.card{background:#111827;padding:30px;border-radius:16px;border:1px solid #1f2937}</style>
+</head>
+<body>
+<div class="card">
+<h2>Join as Closer</h2>
+<p style="color:#9ca3af">Commission-only model. Earn ₹500-₹4,000 per sale.</p>
+<input id="name" placeholder="Full Name">
+<input id="phone" placeholder="WhatsApp Number">
+<input id="email" placeholder="Email">
+<select id="exp"><option>Experience</option><option>0-6 months</option><option>6-12 months</option><option>1+ years</option></select>
+<textarea id="why" placeholder="Why should we hire you?" rows="3"></textarea>
+<button onclick="apply()">Submit Application</button>
+<p id="msg" style="margin-top:15px"></p>
+</div>
+<script>
+function apply(){
+ const data={name:name.value,phone:phone.value,email:email.value,exp:exp.value,why:why.value,status:'pending',date:new Date().toLocaleDateString()};
+ let apps=JSON.parse(localStorage.getItem('closer_apps')||'[]');
+ apps.push(data);
+ localStorage.setItem('closer_apps',JSON.stringify(apps));
+ msg.innerHTML="✓ Application sent! We'll WhatsApp you within 24h.";
+ msg.style.color="#10b981";
+ setTimeout(()=>location.href='login.html',2000);
+}
+</script>
+</body>
+</html>
