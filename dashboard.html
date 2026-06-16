@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html><head><title>Dashboard</title><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>body{background:#0b0f1a;color:#fff;font-family:system-ui;margin:0}header{background:#111827;padding:15px 20px;display:flex;justify-content:space-between}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:15px}.card{background:#111827;padding:18px;border-radius:10px;border:1px solid #1f2937}.val{font-size:24px;color:#7c3aed;font-weight:700} input,select,button{padding:10px;margin:4px;background:#0b0f1a;border:1px solid #374151;color:#fff;border-radius:6px} button{background:#7c3aed;border:none;cursor:pointer} table{width:100%;border-collapse:collapse;margin:15px} th,td{padding:10px;border-bottom:1px solid #1f2937;text-align:left} th{color:#9ca3af;font-size:12px}.pending{color:#f59e0b}.done{color:#10b981}.box{background:#111827;margin:15px;padding:15px;border-radius:10px}</style>
+</head><body>
+<header><div><b id="cn">Closer</b> Dashboard</div><button onclick="logout()">Logout</button></header>
+
+<div class="grid">
+ <div class="card">Leads<div class="val" id="t">0</div></div>
+ <div class="card">Delivered<div class="val" id="d">0</div></div>
+ <div class="card">Pending<div class="val" id="p">0</div></div>
+ <div class="card">Earning<div class="val" id="e">₹0</div></div>
+</div>
+
+<div class="box">
+ <h3>Payment Details (required for withdrawal)</h3>
+ <select id="method" onchange="showMethod()"><option>Bank Transfer</option><option>PayPal</option><option>Wise</option><option>Trust Wallet (USDT)</option></select>
+ <div id="bank"><input id="acc" placeholder="Account Number"><input id="ifsc" placeholder="IFSC"><input id="name" placeholder="Account Holder Name"></div>
+ <div id="paypal" style="display:none"><input id="pp" placeholder="PayPal Email"></div>
+ <div id="wise" style="display:none"><input id="ws" placeholder="Wise Email"></div>
+ <div id="trust" style="display:none"><input id="tw" placeholder="USDT TRC20 Address"></div>
+ <button onclick="savePay()">Save Details</button> <span id="ps" style="color:#10b981;margin-left:10px"></span>
+</div>
+
+<div class="box">
+ <h3>Add Lead</h3>
+ <input id="client" placeholder="Client Name"><input id="phone" placeholder="Phone">
+ <select id="srv"><option>Shorts - ₹500</option><option>Logo - ₹2000</option><option>Website Basic - ₹2500</option><option>Website Pro - ₹4000</option><option>SMMA Starter - $25</option><option>SMMA Pro - $40</option></select>
+ <button onclick="add()">Add</button>
+</div>
+
+<table><thead><tr><th>Date</th><th>Client</th><th>Service</th><th>Status</th><th>₹</th></tr></thead><tbody id="list"></tbody></table>
+
+<div style="padding:15px"><button onclick="wd()" style="background:#10b981">Request Withdrawal</button> <span id="ws2"></span></div>
+
+<script>
+let c=localStorage.getItem('current_closer')||'Closer 1';cn.innerText=c;let k='leads_'+c;let l=JSON.parse(localStorage.getItem(k)||'[]');
+function showMethod(){let m=method.value;bank.style.display=m==='Bank Transfer'?'block':'none';paypal.style.display=m==='PayPal'?'block':'none';wise.style.display=m==='Wise'?'block':'none';trust.style.display=m==='Trust Wallet (USDT)'?'block':'none';}
+function savePay(){let d={method:method.value,acc:acc.value,ifsc:ifsc.value,name:name.value,pp:pp.value,ws:ws.value,tw:tw.value};localStorage.setItem('pay_'+c,JSON.stringify(d));ps.innerText='Saved!';}
+function loadPay(){let d=JSON.parse(localStorage.getItem('pay_'+c)||'{}');if(d.method){method.value=d.method;acc.value=d.acc||'';ifsc.value=d.ifsc||'';name.value=d.name||'';pp.value=d.pp||'';ws.value=d.ws||'';tw.value=d.tw||'';showMethod();}}
+function add(){let s=srv.value;let cm=s.includes('500')?500:s.includes('2000')?2000:s.includes('2500')?2500:s.includes('4000')?4000:s.includes('$25')?2100:3300;l.unshift({dt:new Date().toLocaleDateString(),cl:client.value,ph:phone.value,sr:s,st:'Pending',cm:0,fc:cm});localStorage.setItem(k,JSON.stringify(l));client.value='';phone.value='';ren();}
+function ren(){list.innerHTML=l.map(x=>`<tr><td>${x.dt}</td><td>${x.cl}</td><td>${x.sr}</td><td class="${x.st==='Pending'?'pending':'done'}">${x.st}</td><td>₹${x.cm}</td></tr>`).join('');t.innerText=l.length;d.innerText=l.filter(x=>x.st==='Delivered').length;p.innerText=l.filter(x=>x.st==='Pending').length;e.innerText='₹'+l.reduce((a,b)=>a+b.cm,0);}
+function wd(){let a=l.reduce((a,b)=>a+b.cm,0);if(!localStorage.getItem('pay_'+c)){alert('First save payment details');return}if(a==0){alert('No earnings');return}let r=JSON.parse(localStorage.getItem('wdr')||'[]');r.push({c,dt:new Date().toLocaleDateString(),amt:a,st:'Pending',pay:JSON.parse(localStorage.getItem('pay_'+c))});localStorage.setItem('wdr',JSON.stringify(r));ws2.innerText='Requested!';}
+function logout(){localStorage.removeItem('current_closer');location.href='login.html';}
+loadPay();ren();
+</script></body></html>
