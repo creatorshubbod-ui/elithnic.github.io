@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html><head><title>Admin</title><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>body{background:#0b0f1a;color:#fff;font-family:system-ui;margin:0}header{background:#111827;padding:15px}.tabs{display:flex;gap:8px;padding:15px}.tab{padding:8px 15px;background:#1f2937;border-radius:6px;cursor:pointer}.tab.on{background:#7c3aed}.box{padding:0 15px}.card{background:#111827;padding:12px;margin:8px 0;border-radius:8px;display:flex;justify-content:space-between} button{background:#7c3aed;color:#fff;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;margin-left:5px} table{width:100%;border-collapse:collapse} th,td{padding:8px;border-bottom:1px solid #1f2937} th{color:#9ca3af}</style>
+</head><body>
+<header><h2>Admin Panel</h2></header>
+<div class="tabs"><div class="tab on" onclick="sw(0)">Applications</div><div class="tab" onclick="sw(1)">Closers</div><div class="tab" onclick="sw(2)">Leads</div><div class="tab" onclick="sw(3)">Withdrawals</div></div>
+<div class="box" id="b0"></div><div class="box" id="b1" style="display:none"></div><div class="box" id="b2" style="display:none"></div><div class="box" id="b3" style="display:none"></div>
+<script>
+function sw(n){document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('on',i===n));['b0','b1','b2','b3'].forEach((id,i)=>document.getElementById(id).style.display=i===n?'block':'none');ren();}
+function ren(){
+ let a=JSON.parse(localStorage.getItem('closer_apps')||'[]');b0.innerHTML=a.length?a.map((x,i)=>`<div class="card"><div><b>${x.name}</b> - ${x.phone}</div><button onclick="ap(${i})">Approve</button></div>`).join(''):'No pending';
+ let c=JSON.parse(localStorage.getItem('approved_closers')||'[{"name":"Closer 1"},{"name":"Closer 2"},{"name":"Closer 3"}]');b1.innerHTML=c.map(x=>{let l=JSON.parse(localStorage.getItem('leads_'+x.name)||'[]');return `<div class="card"><div>${x.name} - ${l.length} leads</div><div>₹${l.reduce((a,b)=>a+b.cm,0)}</div></div>`}).join('');
+ let all=[];c.forEach(x=>{JSON.parse(localStorage.getItem('leads_'+x.name)||'[]').forEach(l=>all.push({...l,clsr:x.name}))});b2.innerHTML='<table><tr><th>Closer</th><th>Client</th><th>Service</th><th>Status</th><th></th></tr>'+all.map((x,i)=>`<tr><td>${x.clsr}</td><td>${x.cl}</td><td>${x.sr}</td><td>${x.st}</td><td>${x.st==='Pending'?`<button onclick="dl('${x.clsr}','${x.dt}')">Deliver</button>`:''}</td></tr>`).join('')+'</table>';
+ let w=JSON.parse(localStorage.getItem('wdr')||'[]');b3.innerHTML=w.length?w.map((x,i)=>`<div class="card"><div><b>${x.c}</b> - ₹${x.amt}<br><small>${x.pay.method} - ${x.pay.acc||x.pay.pp||x.pay.ws||x.pay.tw}</small></div>${x.st==='Pending'?`<button onclick="py(${i})">Pay</button>`:`<span style="color:#10b981">Paid</span>`}</div>`).join(''):'No requests';
+}
+function ap(i){let a=JSON.parse(localStorage.getItem('closer_apps')||'[]');let x=a.splice(i,1)[0];localStorage.setItem('closer_apps',JSON.stringify(a));let c=JSON.parse(localStorage.getItem('approved_closers')||'[]');c.push({name:x.name});localStorage.setItem('approved_closers',JSON.stringify(c));alert(x.name+' approved, pass: 1234');ren();}
+function dl(cls,dt){let k='leads_'+cls;let l=JSON.parse(localStorage.getItem(k)||'[]');let f=l.find(x=>x.dt===dt&&x.st==='Pending');if(f){f.st='Delivered';f.cm=f.fc;localStorage.setItem(k,JSON.stringify(l));}ren();}
+function py(i){let w=JSON.parse(localStorage.getItem('wdr')||'[]');w[i].st='Paid';localStorage.setItem('wdr',JSON.stringify(w));let c=w[i].c;let l=JSON.parse(localStorage.getItem('leads_'+c)||'[]');l.forEach(x=>x.cm=0);localStorage.setItem('leads_'+c,JSON.stringify(l));ren();}
+ren();
+</script></body></html>
