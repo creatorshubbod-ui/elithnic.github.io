@@ -14,9 +14,25 @@
        .mesh { background: radial-gradient(at 20% 20%, rgba(59,130,246,0.3) 0px, transparent 50%), radial-gradient(at 80% 20%, rgba(139,92,246,0.25) 0px, transparent 50%), radial-gradient(at 50% 80%, rgba(236,72,153,0.2) 0px, transparent 50%); }
        .card { transition: all 0.3s ease; }
        .card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.5); }
+       .app-shell { font-family: 'Inter', sans-serif; }
+       .admin-tab-btn { display:flex; align-items:center; gap:.6rem; width:100%; text-align:left; padding:.65rem .9rem; border-radius:.85rem; color:#a1a1aa; font-size:13.5px; font-weight:500; transition:.15s; }
+       .admin-tab-btn:hover { background:rgba(255,255,255,.05); color:#fff; }
+       .admin-tab-btn.active { background:rgba(139,92,246,.15); color:#fff; border:1px solid rgba(139,92,246,.3); }
+       table.dash-table { width:100%; font-size:13.5px; border-collapse:collapse; }
+       table.dash-table thead th { text-align:left; padding:.85rem .75rem; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:#71717a; background:rgba(255,255,255,.03); font-weight:600; }
+       .stat-card { padding:1.1rem 1.25rem; border-radius:1.1rem; background:rgba(24,24,27,.6); border:1px solid rgba(255,255,255,.08); }
+       .modal-input { width:100%; padding:.85rem 1rem; border-radius:.85rem; background:rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.1); font-size:14px; color:#fff; }
+       .modal-input:focus { outline:none; border-color:rgba(139,92,246,.5); }
+       .modal-input::placeholder{ color:#71717a; }
+       ::-webkit-scrollbar{width:8px;height:8px;}
+       ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:8px;}
     </style>
 </head>
 <body class="text-zinc-100 antialiased selection:bg-violet-500/30 selection:text-violet-200">
+
+<!-- ====================== PUBLIC SITE ====================== -->
+<div id="publicSite">
+
     <!-- NAV -->
     <nav class="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-2xl border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[68px] flex items-center justify-between">
@@ -35,13 +51,14 @@
                 <a href="#testimonials" class="hover:text-white transition">Results</a>
             </div>
             <div class="flex items-center gap-2">
+                <button onclick="openLoginModal()" class="inline-flex px-4 py-2 rounded-full bg-white/10 border border-white/10 text-white text-sm font-medium hover:bg-white/20 transition">Login</button>
                 <button onclick="openCloserPopup()" class="hidden sm:inline-flex px-4 py-2 rounded-full bg-violet-600 text-white text-sm font-medium hover:bg-violet-500 transition">Apply as Closer</button>
                 <a href="mailto:creatorshubbod@gmail.com?subject=Book%20a%20Call%20-%20US%20Project" class="hidden sm:inline-flex px-4 py-2 rounded-full bg-white text-black text-sm font-medium hover:bg-zinc-200 transition">Book a Call</a>
-                <a href="https://wa.me/919717738735?text=Hi%2C%20I%20am%20interested%20in%20your%20services.%20Can%20you%20share%20more%20details%20about%20my%20project%3F" target="_blank" class="inline-flex px-4 py-2 rounded-full bg-[#25D366] text-black text-sm font-semibold hover:opacity-90 transition">WhatsApp</a>
+                <a href="https://wa.me/919717738735?text=Hi%2C%20I%20am%20interested%20in%20your%20services.%20Can%20you%20share%20more%20details%20about%20my%20project%3F" target="_blank" class="hidden sm:inline-flex px-4 py-2 rounded-full bg-[#25D366] text-black text-sm font-semibold hover:opacity-90 transition">WhatsApp</a>
             </div>
         </div>
     </nav>
- 
+
     <!-- HERO -->
     <header class="relative pt-32 pb-20 lg:pt-44 lg:pb-32 overflow-hidden">
         <div class="absolute inset-0 mesh opacity-60"></div>
@@ -79,7 +96,7 @@
             </div>
         </div>
     </header>
- 
+
     <!-- ABOUT -->
     <section id="about" class="py-20 border-t border-white/5 bg-zinc-950/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -103,7 +120,7 @@
             </div>
         </div>
     </section>
- 
+
     <!-- SERVICES -->
     <section id="services" class="py-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -111,7 +128,7 @@
                 <h2 class="text-4xl sm:text-5xl font-black tracking-tighter mb-4">Services & Fixed Pricing</h2>
                 <p class="text-zinc-400 text-lg">No retainers that creep. Transparent pricing for US founders who value speed.</p>
             </div>
- 
+
             <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
                 <!-- SMMA -->
                 <div class="card group relative bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 border border-white/10 rounded-[28px] p-7 backdrop-blur-xl">
@@ -142,7 +159,7 @@
                         </div>
                     </div>
                 </div>
- 
+
                 <!-- SaaS -->
                 <div class="card group relative bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 border border-white/10 rounded-[28px] p-7 backdrop-blur-xl">
                     <div class="flex items-start justify-between mb-6">
@@ -172,7 +189,7 @@
                         </div>
                     </div>
                 </div>
- 
+
                 <!-- Lead Gen -->
                 <div class="card group relative bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 border border-white/10 rounded-[28px] p-7 backdrop-blur-xl">
                     <div class="flex items-start justify-between mb-6">
@@ -202,7 +219,7 @@
                         </div>
                     </div>
                 </div>
- 
+
                 <!-- Websites -->
                 <div class="card bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 border border-white/10 rounded-[28px] p-7">
                     <div class="w-11 h-11 rounded-2xl bg-blue-500/15 border border-blue-500/20 flex items-center justify-center mb-6">
@@ -216,7 +233,7 @@
                     </div>
                     <p class="text-[13px] text-zinc-400 mt-4">Responsive • SEO-ready • CMS • Speed optimized</p>
                 </div>
- 
+
                 <!-- Branding -->
                 <div class="card bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 border border-white/10 rounded-[28px] p-7">
                     <div class="w-11 h-11 rounded-2xl bg-pink-500/15 border border-pink-500/20 flex items-center justify-center mb-6">
@@ -231,7 +248,7 @@
                         <li class="flex gap-2"><span class="text-emerald-400">✓</span> Social assets</li>
                     </ul>
                 </div>
- 
+
                 <!-- Videos -->
                 <div class="card bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 border border-white/10 rounded-[28px] p-7">
                     <div class="w-11 h-11 rounded-2xl bg-red-500/15 border border-red-500/20 flex items-center justify-center mb-6">
@@ -246,7 +263,7 @@
                     <p class="text-[13px] text-zinc-400 mt-4">Editing • Captions • Hooks • 24h delivery</p>
                 </div>
             </div>
- 
+
             <!-- SHOPIFY FULL WIDTH -->
             <div class="mt-5 card bg-gradient-to-b from-zinc-900 to-black border border-amber-500/20 rounded-[28px] p-8">
                 <div class="grid lg:grid-cols-12 gap-8">
@@ -279,7 +296,7 @@
             </div>
         </div>
     </section>
- 
+
     <!-- WORK -->
     <section id="work" class="py-24 border-y border-white/5 bg-zinc-950/70">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -317,7 +334,7 @@
             </div>
         </div>
     </section>
- 
+
     <!-- DELIVERY PARTNER -->
     <section id="delivery-partner" class="py-24 border-y border-white/5 bg-gradient-to-b from-zinc-950 to-black">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -356,7 +373,7 @@
             </div>
         </div>
     </section>
- 
+
     <!-- TESTIMONIALS -->
     <section id="testimonials" class="py-24 bg-[#f7f7f8] text-zinc-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -388,7 +405,7 @@
             </div>
         </div>
     </section>
- 
+
     <!-- PRICING TABLE -->
     <section id="pricing" class="py-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -416,7 +433,7 @@
             </div>
         </div>
     </section>
- 
+
     <!-- CONTACT -->
     <section id="contact" class="py-24 border-t border-white/5 bg-zinc-950/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -465,7 +482,7 @@
             </div>
         </div>
     </section>
- 
+
     <!-- FOOTER -->
     <footer class="py-10 border-t border-white/5 text-center text-[13px] text-zinc-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -473,15 +490,15 @@
             <div class="mt-2">Built for US clients • Fast delivery • Clear pricing</div>
         </div>
     </footer>
- 
+
     <!-- FLOATING WHATSAPP -->
     <a href="https://wa.me/919717738735?text=Hi%2C%20I%20am%20interested%20in%20your%20services.%20Can%20you%20share%20more%20details%20about%20my%20project%3F" target="_blank" class="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-[#25D366] shadow-2xl shadow-green-900/30 flex items-center justify-center hover:scale-105 transition">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
     </a>
- 
+
     <!-- CLOSER POPUP -->
     <div id="closerPopup" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[100] hidden items-center justify-center p-4">
-        <div class="w-full max-w-md bg-zinc-900 border border-white/10 rounded-[28px] p-8 shadow-2xl">
+        <div class="w-full max-w-md bg-zinc-900 border border-white/10 rounded-[28px] p-8 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-start mb-6">
                 <div>
                     <h3 class="text-2xl font-bold">Apply as Closer</h3>
@@ -490,21 +507,22 @@
                 <button onclick="closeCloserPopup()" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10">✕</button>
             </div>
             <div class="space-y-3">
-                <input id="cName" placeholder="Full Name" class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/10 focus:border-violet-500/50 focus:outline-none text-[14px]">
-                <input id="cPhone" placeholder="Phone Number" type="tel" class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/10 focus:border-violet-500/50 focus:outline-none text-[14px]">
-                <input id="cWa" placeholder="WhatsApp Number" type="tel" class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/10 focus:border-violet-500/50 focus:outline-none text-[14px]">
-                <input id="cUpi" placeholder="UPI ID" class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/10 focus:border-violet-500/50 focus:outline-none text-[14px]">
-                <input id="cPaypal" placeholder="PayPal Email" class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/10 focus:border-violet-500/50 focus:outline-none text-[14px]">
-                <textarea id="cExp" placeholder="Your sales experience..." rows="3" class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/10 focus:border-violet-500/50 focus:outline-none text-[14px]"></textarea>
+                <input id="cName" placeholder="Full Name" class="modal-input">
+                <input id="cEmail" type="email" placeholder="Email Address" class="modal-input">
+                <input id="cPhone" placeholder="Phone Number" type="tel" class="modal-input">
+                <input id="cWa" placeholder="WhatsApp Number" type="tel" class="modal-input">
+                <input id="cUpi" placeholder="UPI ID" class="modal-input">
+                <input id="cPaypal" placeholder="PayPal Email" class="modal-input">
+                <textarea id="cExp" placeholder="Your sales experience..." rows="3" class="modal-input"></textarea>
             </div>
             <button onclick="submitCloser()" class="w-full mt-6 px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 font-semibold hover:opacity-90 transition">Submit Application</button>
-            <p class="text-[12px] text-zinc-500 text-center mt-4">Application goes directly to founder's WhatsApp</p>
+            <p class="text-[12px] text-zinc-500 text-center mt-4">Admin reviews every application — you'll get login credentials once approved.</p>
         </div>
     </div>
- 
+
     <!-- DELIVERY PARTNER POPUP -->
     <div id="deliveryPopup" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[100] hidden items-center justify-center p-4">
-        <div class="w-full max-w-md bg-zinc-900 border border-white/10 rounded-[28px] p-8 shadow-2xl">
+        <div class="w-full max-w-md bg-zinc-900 border border-white/10 rounded-[28px] p-8 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-start mb-6">
                 <div>
                     <h3 class="text-2xl font-bold">Apply as Delivery Partner</h3>
@@ -513,12 +531,13 @@
                 <button onclick="closeDeliveryPopup()" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10">✕</button>
             </div>
             <div class="space-y-3">
-                <input id="dName" placeholder="Full Name" class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:outline-none text-[14px]">
-                <input id="dPhone" placeholder="Phone Number" type="tel" class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:outline-none text-[14px]">
-                <input id="dWa" placeholder="WhatsApp Number" type="tel" class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:outline-none text-[14px]">
-                <input id="dCity" placeholder="City / Location" class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:outline-none text-[14px]">
-                <select id="dSkill" class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:outline-none text-[14px] text-zinc-300">
-                    <option value="">Select your skill</option>
+                <input id="dName" placeholder="Full Name" class="modal-input">
+                <input id="dEmail" type="email" placeholder="Email Address" class="modal-input">
+                <input id="dPhone" placeholder="Phone Number" type="tel" class="modal-input">
+                <input id="dWa" placeholder="WhatsApp Number" type="tel" class="modal-input">
+                <input id="dCity" placeholder="City / Location" class="modal-input">
+                <select id="dSkill" class="modal-input text-zinc-300">
+                    <option value="">Select your primary skill</option>
                     <option>Design / Editing</option>
                     <option>Web / SaaS Development</option>
                     <option>Content Writing</option>
@@ -526,58 +545,1095 @@
                     <option>Video Editing</option>
                     <option>Other</option>
                 </select>
-                <input id="dUpi" placeholder="UPI ID (for payouts)" class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:outline-none text-[14px]">
-                <textarea id="dExp" placeholder="Your experience / portfolio link..." rows="3" class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:outline-none text-[14px]"></textarea>
+                <input id="dServices" placeholder="Services you can deliver (e.g. Design, SMM, Dev)" class="modal-input">
+                <input id="dTeamSize" type="number" min="1" placeholder="Team Size (e.g. 1, 3, 10)" class="modal-input">
+                <input id="dUpi" placeholder="UPI ID (for payouts)" class="modal-input">
+                <textarea id="dExp" placeholder="Your experience / portfolio link..." rows="3" class="modal-input"></textarea>
             </div>
             <button onclick="submitDelivery()" class="w-full mt-6 px-6 py-3.5 rounded-xl bg-emerald-500 text-black font-semibold hover:bg-emerald-400 transition">Submit Application</button>
-            <p class="text-[12px] text-zinc-500 text-center mt-4">Application goes directly to founder's WhatsApp</p>
+            <p class="text-[12px] text-zinc-500 text-center mt-4">Admin reviews every application — you'll get login credentials once approved.</p>
         </div>
     </div>
- 
-    <script>
-        function sendMail(e){
-            e.preventDefault();
-            const f = e.target;
-            const name = encodeURIComponent(f.name.value);
-            const email = encodeURIComponent(f.email.value);
-            const service = encodeURIComponent(f.service.value);
-            const message = encodeURIComponent(f.message.value);
-            const subject = `New project: ${service} - ${name}`;
-            const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AService: ${service}%0D%0A%0D%0A${message}`;
-            window.location.href = `mailto:creatorshubbod@gmail.com?subject=${subject}&body=${body}`;
+
+</div>
+<!-- ==================== END PUBLIC SITE ==================== -->
+
+
+<!-- ====================== LOGIN MODAL ====================== -->
+<div id="loginModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[100] hidden items-center justify-center p-4">
+    <div class="w-full max-w-sm bg-zinc-900 border border-white/10 rounded-[28px] p-8 shadow-2xl">
+        <div class="flex justify-between items-start mb-6">
+            <div>
+                <h3 class="text-2xl font-bold">Login</h3>
+                <p class="text-sm text-zinc-500 mt-1">Admin · Closer · Delivery Partner</p>
+            </div>
+            <button onclick="closeModal('loginModal')" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10">✕</button>
+        </div>
+        <div class="space-y-3">
+            <input id="loginUsername" placeholder="Username" class="modal-input" onkeydown="if(event.key==='Enter')handleLogin()">
+            <input id="loginPassword" type="password" placeholder="Password" class="modal-input" onkeydown="if(event.key==='Enter')handleLogin()">
+            <div id="loginError" class="hidden text-red-400 text-[13px] px-1"></div>
+        </div>
+        <button onclick="handleLogin()" class="w-full mt-6 px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 font-semibold hover:opacity-90 transition">Login</button>
+        <p class="text-[12px] text-zinc-500 text-center mt-4">Default admin: <span class="text-zinc-400 font-mono">admin / admin123</span></p>
+    </div>
+</div>
+
+<!-- ====================== LEAD MODAL (Closer) ====================== -->
+<div id="leadModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[100] hidden items-center justify-center p-4">
+    <div class="w-full max-w-md bg-zinc-900 border border-white/10 rounded-[28px] p-8 shadow-2xl">
+        <div class="flex justify-between items-start mb-6">
+            <h3 id="leadModalTitle" class="text-2xl font-bold">Add Lead</h3>
+            <button onclick="closeModal('leadModal')" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10">✕</button>
+        </div>
+        <div class="space-y-3">
+            <input id="leadClientName" placeholder="Client Name" class="modal-input">
+            <input id="leadContact" placeholder="Contact (phone / email)" class="modal-input">
+            <input id="leadService" placeholder="Service (e.g. SMMA, Website)" class="modal-input">
+            <input id="leadValue" type="number" min="0" placeholder="Deal Value ($)" class="modal-input">
+            <select id="leadStatus" class="modal-input text-zinc-300">
+                <option value="Pending">Pending</option>
+                <option value="Closed">Closed</option>
+                <option value="Lost">Lost</option>
+            </select>
+        </div>
+        <button onclick="saveLead()" class="w-full mt-6 px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 font-semibold hover:opacity-90 transition">Save Lead</button>
+    </div>
+</div>
+
+<!-- ====================== FREELANCER MODAL (Partner) ====================== -->
+<div id="freelancerModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[100] hidden items-center justify-center p-4">
+    <div class="w-full max-w-md bg-zinc-900 border border-white/10 rounded-[28px] p-8 shadow-2xl">
+        <div class="flex justify-between items-start mb-6">
+            <h3 id="freelancerModalTitle" class="text-2xl font-bold">Add Freelancer</h3>
+            <button onclick="closeModal('freelancerModal')" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10">✕</button>
+        </div>
+        <div class="space-y-3">
+            <input id="freelancerName" placeholder="Freelancer Name" class="modal-input">
+            <input id="freelancerSkill" placeholder="Skill (e.g. Video Editor)" class="modal-input">
+            <input id="freelancerWhatsapp" placeholder="WhatsApp Number" class="modal-input">
+        </div>
+        <button onclick="saveFreelancer()" class="w-full mt-6 px-6 py-3.5 rounded-xl bg-emerald-500 text-black font-semibold hover:bg-emerald-400 transition">Save Freelancer</button>
+    </div>
+</div>
+
+<!-- ====================== PROJECT MODAL (Admin / Partner) ====================== -->
+<div id="projectModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[100] hidden items-center justify-center p-4">
+    <div class="w-full max-w-md bg-zinc-900 border border-white/10 rounded-[28px] p-8 shadow-2xl max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-start mb-6">
+            <h3 id="projectModalTitle" class="text-2xl font-bold">Add Project</h3>
+            <button onclick="closeModal('projectModal')" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10">✕</button>
+        </div>
+        <div class="space-y-3">
+            <input id="projectClientName" placeholder="Client Name" class="modal-input">
+            <input id="projectService" placeholder="Service" class="modal-input">
+            <input id="projectBudget" type="number" min="0" placeholder="Budget ($)" class="modal-input">
+            <div>
+                <label class="text-[11px] uppercase tracking-wide text-zinc-500 mb-1.5 block">Assigned Closer</label>
+                <select id="projectAssignedCloser" class="modal-input text-zinc-300"></select>
+            </div>
+            <div>
+                <label class="text-[11px] uppercase tracking-wide text-zinc-500 mb-1.5 block">Assigned Delivery Partner</label>
+                <select id="projectAssignedPartner" class="modal-input text-zinc-300"></select>
+            </div>
+            <div>
+                <label class="text-[11px] uppercase tracking-wide text-zinc-500 mb-1.5 block">Status</label>
+                <select id="projectStatusSelect" class="modal-input text-zinc-300"></select>
+            </div>
+        </div>
+        <button onclick="saveProject()" class="w-full mt-6 px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 font-semibold hover:opacity-90 transition">Save Project</button>
+    </div>
+</div>
+
+
+<!-- ====================== ADMIN APP ====================== -->
+<div id="adminApp" class="app-shell hidden min-h-screen bg-[#050508] text-zinc-100">
+    <div class="flex min-h-screen">
+        <aside class="w-64 shrink-0 border-r border-white/10 bg-zinc-950/80 p-5 flex flex-col">
+            <div class="flex items-center gap-3 mb-8 px-1">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-violet-600 flex items-center justify-center font-black text-white">CH</div>
+                <div>
+                    <div class="font-semibold text-[14px] leading-none">Admin Panel</div>
+                    <div class="text-[11px] text-zinc-500 leading-none mt-1">Creator's Hub</div>
+                </div>
+            </div>
+            <nav class="space-y-1 flex-1 overflow-y-auto">
+                <button id="adminTabBtn-overview" onclick="switchAdminTab('overview')" class="admin-tab-btn">📊 Overview</button>
+                <button id="adminTabBtn-closerApps" onclick="switchAdminTab('closerApps')" class="admin-tab-btn">🧾 Closer Applications</button>
+                <button id="adminTabBtn-partnerApps" onclick="switchAdminTab('partnerApps')" class="admin-tab-btn">🧾 Partner Applications</button>
+                <button id="adminTabBtn-closers" onclick="switchAdminTab('closers')" class="admin-tab-btn">🧑‍💼 Closers</button>
+                <button id="adminTabBtn-partners" onclick="switchAdminTab('partners')" class="admin-tab-btn">🤝 Delivery Partners</button>
+                <button id="adminTabBtn-leads" onclick="switchAdminTab('leads')" class="admin-tab-btn">🎯 Leads</button>
+                <button id="adminTabBtn-projects" onclick="switchAdminTab('projects')" class="admin-tab-btn">📁 Projects</button>
+                <button id="adminTabBtn-freelancers" onclick="switchAdminTab('freelancers')" class="admin-tab-btn">🧰 Freelancers</button>
+                <button id="adminTabBtn-settings" onclick="switchAdminTab('settings')" class="admin-tab-btn">⚙️ Settings</button>
+            </nav>
+            <button onclick="logout()" class="mt-4 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300 text-sm font-medium hover:bg-red-500/20 transition">Logout</button>
+        </aside>
+
+        <main class="flex-1 p-6 lg:p-10 overflow-y-auto max-h-screen">
+
+            <!-- OVERVIEW -->
+            <div id="admin-overview" class="admin-panel">
+                <h1 class="text-3xl font-black tracking-tight mb-1">Overview</h1>
+                <p class="text-zinc-500 text-sm mb-8">Live snapshot of the agency — updates automatically.</p>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Closer Applications</div><div id="statCloserApps" class="text-2xl font-bold">0</div></div>
+                    <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Partner Applications</div><div id="statPartnerApps" class="text-2xl font-bold">0</div></div>
+                    <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Approved Closers</div><div id="statApprovedClosers" class="text-2xl font-bold text-emerald-400">0</div></div>
+                    <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Approved Partners</div><div id="statApprovedPartners" class="text-2xl font-bold text-emerald-400">0</div></div>
+                    <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Pending Approvals</div><div id="statPendingApprovals" class="text-2xl font-bold text-amber-400">0</div></div>
+                    <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Total Leads</div><div id="statTotalLeads" class="text-2xl font-bold">0</div></div>
+                    <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Total Projects</div><div id="statTotalProjects" class="text-2xl font-bold">0</div></div>
+                    <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Active Projects</div><div id="statActiveProjects" class="text-2xl font-bold text-blue-400">0</div></div>
+                    <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Completed Projects</div><div id="statCompletedProjects" class="text-2xl font-bold text-emerald-400">0</div></div>
+                    <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Total Revenue</div><div id="statTotalRevenue" class="text-2xl font-bold gradient-text">$0</div></div>
+                </div>
+            </div>
+
+            <!-- CLOSER APPLICATIONS -->
+            <div id="admin-closerApps" class="admin-panel hidden">
+                <h1 class="text-3xl font-black tracking-tight mb-1">Closer Applications</h1>
+                <p class="text-zinc-500 text-sm mb-6">Approve to auto-generate login credentials.</p>
+                <div class="rounded-2xl border border-white/10 overflow-x-auto">
+                    <table class="dash-table">
+                        <thead><tr><th>Name</th><th>Email</th><th>WhatsApp</th><th>Experience</th><th>Status</th><th class="text-right">Action</th></tr></thead>
+                        <tbody id="adminCloserAppsBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PARTNER APPLICATIONS -->
+            <div id="admin-partnerApps" class="admin-panel hidden">
+                <h1 class="text-3xl font-black tracking-tight mb-1">Delivery Partner Applications</h1>
+                <p class="text-zinc-500 text-sm mb-6">Approve to auto-generate login credentials.</p>
+                <div class="rounded-2xl border border-white/10 overflow-x-auto">
+                    <table class="dash-table">
+                        <thead><tr><th>Name</th><th>Email</th><th>WhatsApp</th><th>Services</th><th>Team Size</th><th>Status</th><th class="text-right">Action</th></tr></thead>
+                        <tbody id="adminPartnerAppsBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CLOSERS -->
+            <div id="admin-closers" class="admin-panel hidden">
+                <h1 class="text-3xl font-black tracking-tight mb-1">Closers</h1>
+                <p class="text-zinc-500 text-sm mb-6">Approved closers and their login credentials.</p>
+                <div class="rounded-2xl border border-white/10 overflow-x-auto">
+                    <table class="dash-table">
+                        <thead><tr><th>Name</th><th>Email</th><th>Username</th><th>Password</th><th>Performance</th><th class="text-right">Action</th></tr></thead>
+                        <tbody id="adminClosersBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PARTNERS -->
+            <div id="admin-partners" class="admin-panel hidden">
+                <h1 class="text-3xl font-black tracking-tight mb-1">Delivery Partners</h1>
+                <p class="text-zinc-500 text-sm mb-6">Approved partners and their login credentials.</p>
+                <div class="rounded-2xl border border-white/10 overflow-x-auto">
+                    <table class="dash-table">
+                        <thead><tr><th>Name</th><th>Email</th><th>Username</th><th>Password</th><th>Freelancers</th><th>Projects</th><th class="text-right">Action</th></tr></thead>
+                        <tbody id="adminPartnersBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- LEADS -->
+            <div id="admin-leads" class="admin-panel hidden">
+                <h1 class="text-3xl font-black tracking-tight mb-1">All Leads</h1>
+                <p class="text-zinc-500 text-sm mb-6">Every lead, across every closer.</p>
+                <div class="rounded-2xl border border-white/10 overflow-x-auto">
+                    <table class="dash-table">
+                        <thead><tr><th>Client</th><th>Contact</th><th>Service</th><th>Value</th><th>Closer</th><th>Status</th></tr></thead>
+                        <tbody id="adminLeadsBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PROJECTS -->
+            <div id="admin-projects" class="admin-panel hidden">
+                <div class="flex items-center justify-between mb-1">
+                    <h1 class="text-3xl font-black tracking-tight">Projects</h1>
+                    <button onclick="openProjectModal('admin')" class="px-4 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium transition">+ Add Project</button>
+                </div>
+                <p class="text-zinc-500 text-sm mb-6">Full visibility into every project and status change.</p>
+                <div class="rounded-2xl border border-white/10 overflow-x-auto">
+                    <table class="dash-table">
+                        <thead><tr><th>ID</th><th>Client</th><th>Service</th><th>Budget</th><th>Closer</th><th>Partner</th><th>Status</th><th class="text-right">Action</th></tr></thead>
+                        <tbody id="adminProjectsBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- FREELANCERS -->
+            <div id="admin-freelancers" class="admin-panel hidden">
+                <h1 class="text-3xl font-black tracking-tight mb-1">Freelancers</h1>
+                <p class="text-zinc-500 text-sm mb-6">Every freelancer added by every delivery partner.</p>
+                <div class="rounded-2xl border border-white/10 overflow-x-auto">
+                    <table class="dash-table">
+                        <thead><tr><th>Name</th><th>Skill</th><th>WhatsApp</th><th>Managed By</th></tr></thead>
+                        <tbody id="adminFreelancersBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SETTINGS -->
+            <div id="admin-settings" class="admin-panel hidden">
+                <h1 class="text-3xl font-black tracking-tight mb-1">Settings</h1>
+                <p class="text-zinc-500 text-sm mb-6">Change the admin login password.</p>
+                <div class="max-w-md p-6 rounded-2xl border border-white/10 bg-zinc-900/60">
+                    <div class="space-y-3">
+                        <input id="settingsCurrentPassword" type="password" placeholder="Current Password" class="modal-input">
+                        <input id="settingsNewPassword" type="password" placeholder="New Password" class="modal-input">
+                        <input id="settingsConfirmPassword" type="password" placeholder="Confirm New Password" class="modal-input">
+                    </div>
+                    <button onclick="changeAdminPassword()" class="w-full mt-5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 font-semibold hover:opacity-90 transition">Update Password</button>
+                    <div id="settingsMsg" class="text-sm mt-3"></div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+
+<!-- ====================== CLOSER APP ====================== -->
+<div id="closerApp" class="app-shell hidden min-h-screen bg-[#050508] text-zinc-100">
+    <header class="flex items-center justify-between px-6 lg:px-10 py-5 border-b border-white/10 bg-zinc-950/80">
+        <div>
+            <div class="font-semibold text-lg">Closer Dashboard</div>
+            <div class="text-[13px] text-zinc-500">Welcome back, <span id="closerWelcomeName" class="text-zinc-300"></span></div>
+        </div>
+        <button onclick="logout()" class="px-4 py-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300 text-sm font-medium hover:bg-red-500/20 transition">Logout</button>
+    </header>
+    <main class="p-6 lg:p-10 max-w-6xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
+            <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Leads Assigned</div><div id="closerStatTotal" class="text-2xl font-bold">0</div></div>
+            <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Leads Closed</div><div id="closerStatClosed" class="text-2xl font-bold text-emerald-400">0</div></div>
+            <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Leads Pending</div><div id="closerStatPending" class="text-2xl font-bold text-amber-400">0</div></div>
+            <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Conversion Rate</div><div id="closerStatConversion" class="text-2xl font-bold">0%</div></div>
+            <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Commission Earned</div><div id="closerStatCommission" class="text-2xl font-bold gradient-text">$0</div></div>
+        </div>
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-bold">My Leads</h2>
+            <button onclick="openLeadModal()" class="px-4 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium transition">+ Add Lead</button>
+        </div>
+        <div class="rounded-2xl border border-white/10 overflow-x-auto">
+            <table class="dash-table">
+                <thead><tr><th>Client</th><th>Contact</th><th>Service</th><th>Value</th><th>Status</th><th class="text-right">Actions</th></tr></thead>
+                <tbody id="closerLeadsBody"></tbody>
+            </table>
+        </div>
+        <p class="text-[12px] text-zinc-500 mt-4">Commission is calculated at 10% of deal value on every lead marked Closed.</p>
+    </main>
+</div>
+
+
+<!-- ====================== PARTNER APP ====================== -->
+<div id="partnerApp" class="app-shell hidden min-h-screen bg-[#050508] text-zinc-100">
+    <header class="flex items-center justify-between px-6 lg:px-10 py-5 border-b border-white/10 bg-zinc-950/80">
+        <div>
+            <div class="font-semibold text-lg">Delivery Partner Dashboard</div>
+            <div class="text-[13px] text-zinc-500">Welcome back, <span id="partnerWelcomeName" class="text-zinc-300"></span></div>
+        </div>
+        <button onclick="logout()" class="px-4 py-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300 text-sm font-medium hover:bg-red-500/20 transition">Logout</button>
+    </header>
+    <main class="p-6 lg:p-10 max-w-6xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
+            <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Active Projects</div><div id="partnerStatActive" class="text-2xl font-bold text-blue-400">0</div></div>
+            <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Completed Projects</div><div id="partnerStatCompleted" class="text-2xl font-bold text-emerald-400">0</div></div>
+            <div class="stat-card"><div class="text-[11px] uppercase tracking-wide text-zinc-500 mb-2">Freelancers Managed</div><div id="partnerStatFreelancers" class="text-2xl font-bold">0</div></div>
+        </div>
+
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-bold">My Freelancers</h2>
+            <button onclick="openFreelancerModal()" class="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-sm font-medium transition">+ Add Freelancer</button>
+        </div>
+        <div class="rounded-2xl border border-white/10 overflow-x-auto mb-12">
+            <table class="dash-table">
+                <thead><tr><th>Name</th><th>Skill</th><th>WhatsApp</th><th class="text-right">Actions</th></tr></thead>
+                <tbody id="partnerFreelancersBody"></tbody>
+            </table>
+        </div>
+
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-bold">My Projects</h2>
+            <button onclick="openProjectModal('partner')" class="px-4 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium transition">+ Add Project</button>
+        </div>
+        <div class="rounded-2xl border border-white/10 overflow-x-auto">
+            <table class="dash-table">
+                <thead><tr><th>ID</th><th>Client</th><th>Service</th><th>Budget</th><th>Closer</th><th>Status</th></tr></thead>
+                <tbody id="partnerProjectsBody"></tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+
+<script>
+/* =====================================================================
+   CREATOR'S HUB — ROLE-BASED AGENCY MANAGEMENT SYSTEM
+   Vanilla JS + localStorage only. No backend, no external libraries.
+   ===================================================================== */
+
+const DB_KEYS = {
+    admin:'ch_admin', closerApps:'ch_closerApps', partnerApps:'ch_partnerApps',
+    closers:'ch_closers', partners:'ch_partners', leads:'ch_leads',
+    freelancers:'ch_freelancers', projects:'ch_projects', counters:'ch_counters', session:'ch_session'
+};
+const PROJECT_STATUSES = ['New Lead','Assigned','Accepted','In Progress','Delivered','Completed','Cancelled'];
+const COMMISSION_RATE = 0.10;
+
+/* ---------------- storage helpers ---------------- */
+function loadDB(key, fallback){
+    try{
+        const raw = localStorage.getItem(key);
+        return raw !== null ? JSON.parse(raw) : fallback;
+    }catch(e){ return fallback; }
+}
+function saveDB(key, val){ localStorage.setItem(key, JSON.stringify(val)); }
+
+function initDB(){
+    if(localStorage.getItem(DB_KEYS.admin) === null) saveDB(DB_KEYS.admin, {username:'admin', password:'admin123'});
+    if(localStorage.getItem(DB_KEYS.closerApps) === null) saveDB(DB_KEYS.closerApps, []);
+    if(localStorage.getItem(DB_KEYS.partnerApps) === null) saveDB(DB_KEYS.partnerApps, []);
+    if(localStorage.getItem(DB_KEYS.closers) === null) saveDB(DB_KEYS.closers, []);
+    if(localStorage.getItem(DB_KEYS.partners) === null) saveDB(DB_KEYS.partners, []);
+    if(localStorage.getItem(DB_KEYS.leads) === null) saveDB(DB_KEYS.leads, []);
+    if(localStorage.getItem(DB_KEYS.freelancers) === null) saveDB(DB_KEYS.freelancers, []);
+    if(localStorage.getItem(DB_KEYS.projects) === null) saveDB(DB_KEYS.projects, []);
+    if(localStorage.getItem(DB_KEYS.counters) === null) saveDB(DB_KEYS.counters, {closer:1000, partner:2000, project:1000, app:0});
+}
+
+function nextCounter(key){
+    const c = loadDB(DB_KEYS.counters, {closer:1000, partner:2000, project:1000, app:0});
+    c[key] = (c[key]||0) + 1;
+    saveDB(DB_KEYS.counters, c);
+    return c[key];
+}
+function genAppId(){ return 'APP' + nextCounter('app'); }
+function genUsername(role){ return role === 'closer' ? ('closer_' + nextCounter('closer')) : ('partner_' + nextCounter('partner')); }
+function genPassword(){ return 'CH' + Math.floor(100000 + Math.random()*900000); }
+function genProjectId(){ return 'PRJ-' + nextCounter('project'); }
+
+function esc(str){
+    return String(str ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function setText(id, val){ const el = document.getElementById(id); if(el) el.textContent = val; }
+function show(id){ const el = document.getElementById(id); el.classList.remove('hidden'); el.classList.add('flex'); }
+function closeModal(id){ const el = document.getElementById(id); el.classList.add('hidden'); el.classList.remove('flex'); }
+
+function statusBadge(status){
+    const map = {
+        Pending:'bg-amber-500/15 text-amber-300 border-amber-500/30',
+        Approved:'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
+        Rejected:'bg-red-500/15 text-red-300 border-red-500/30',
+        Closed:'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
+        Lost:'bg-red-500/15 text-red-300 border-red-500/30',
+        'New Lead':'bg-blue-500/15 text-blue-300 border-blue-500/30',
+        Assigned:'bg-violet-500/15 text-violet-300 border-violet-500/30',
+        Accepted:'bg-cyan-500/15 text-cyan-300 border-cyan-500/30',
+        'In Progress':'bg-amber-500/15 text-amber-300 border-amber-500/30',
+        Delivered:'bg-indigo-500/15 text-indigo-300 border-indigo-500/30',
+        Completed:'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
+        Cancelled:'bg-red-500/15 text-red-300 border-red-500/30',
+    };
+    const cls = map[status] || 'bg-white/10 text-zinc-300 border-white/20';
+    return `<span class="text-[11px] px-2.5 py-1 rounded-full border ${cls} whitespace-nowrap">${esc(status)}</span>`;
+}
+
+/* ---------------- session / auth ---------------- */
+function getSession(){ return loadDB(DB_KEYS.session, null); }
+function setSession(s){ saveDB(DB_KEYS.session, s); }
+function logout(){ localStorage.removeItem(DB_KEYS.session); location.reload(); }
+
+function openLoginModal(){
+    document.getElementById('loginUsername').value = '';
+    document.getElementById('loginPassword').value = '';
+    document.getElementById('loginError').classList.add('hidden');
+    show('loginModal');
+}
+
+function handleLogin(){
+    const u = document.getElementById('loginUsername').value.trim();
+    const p = document.getElementById('loginPassword').value;
+    const errEl = document.getElementById('loginError');
+    errEl.classList.add('hidden');
+
+    if(!u || !p){ errEl.textContent = 'Please enter both username and password.'; errEl.classList.remove('hidden'); return; }
+
+    const admin = loadDB(DB_KEYS.admin, {username:'admin', password:'admin123'});
+    if(u === admin.username && p === admin.password){
+        setSession({role:'admin', username:u, name:'Administrator'});
+        closeModal('loginModal');
+        enterApp();
+        return;
+    }
+    const closers = loadDB(DB_KEYS.closers, []);
+    const closer = closers.find(c => c.username === u && c.password === p);
+    if(closer){
+        setSession({role:'closer', username:u, name:closer.name});
+        closeModal('loginModal');
+        enterApp();
+        return;
+    }
+    const partners = loadDB(DB_KEYS.partners, []);
+    const partner = partners.find(pp => pp.username === u && pp.password === p);
+    if(partner){
+        setSession({role:'partner', username:u, name:partner.name});
+        closeModal('loginModal');
+        enterApp();
+        return;
+    }
+    errEl.textContent = 'Invalid username or password.';
+    errEl.classList.remove('hidden');
+}
+
+function enterApp(){
+    const s = getSession();
+    if(!s) return;
+    document.getElementById('publicSite').classList.add('hidden');
+    document.getElementById('adminApp').classList.add('hidden');
+    document.getElementById('closerApp').classList.add('hidden');
+    document.getElementById('partnerApp').classList.add('hidden');
+    if(s.role === 'admin'){
+        document.getElementById('adminApp').classList.remove('hidden');
+        switchAdminTab('overview');
+        renderAdmin();
+    } else if(s.role === 'closer'){
+        document.getElementById('closerApp').classList.remove('hidden');
+        renderCloser();
+    } else if(s.role === 'partner'){
+        document.getElementById('partnerApp').classList.remove('hidden');
+        renderPartner();
+    }
+}
+
+/* ---------------- public site: applications ---------------- */
+function submitCloserApplication(data){
+    const apps = loadDB(DB_KEYS.closerApps, []);
+    apps.push({
+        id: genAppId(), name:data.name, email:data.email, whatsapp:data.whatsapp,
+        experience:data.experience || '', status:'Pending', appliedAt: new Date().toISOString()
+    });
+    saveDB(DB_KEYS.closerApps, apps);
+}
+function submitPartnerApplication(data){
+    const apps = loadDB(DB_KEYS.partnerApps, []);
+    apps.push({
+        id: genAppId(), name:data.name, email:data.email, whatsapp:data.whatsapp,
+        services:data.services || '', teamSize:data.teamSize || '1', experience:data.experience || '',
+        status:'Pending', appliedAt: new Date().toISOString()
+    });
+    saveDB(DB_KEYS.partnerApps, apps);
+}
+
+function submitCloser(){
+    const n = document.getElementById('cName').value.trim();
+    const email = document.getElementById('cEmail').value.trim();
+    const p = document.getElementById('cPhone').value.trim();
+    const w = document.getElementById('cWa').value.trim();
+    const u = document.getElementById('cUpi').value.trim();
+    const pp = document.getElementById('cPaypal').value.trim();
+    const e = document.getElementById('cExp').value.trim();
+    if(!n || !email || !w){ alert('Please fill name, email and WhatsApp'); return; }
+
+    submitCloserApplication({name:n, email:email, whatsapp:w, experience:e});
+
+    const msg = `*NEW CLOSER APPLICATION*%0A%0AName: ${encodeURIComponent(n)}%0AEmail: ${encodeURIComponent(email)}%0APhone: ${encodeURIComponent(p)}%0AWhatsApp: ${encodeURIComponent(w)}%0AUPI: ${encodeURIComponent(u)}%0APayPal: ${encodeURIComponent(pp)}%0AExperience: ${encodeURIComponent(e)}`;
+    window.open(`https://wa.me/919717738735?text=${msg}`, '_blank');
+
+    closeCloserPopup();
+    ['cName','cEmail','cPhone','cWa','cUpi','cPaypal','cExp'].forEach(id => document.getElementById(id).value = '');
+    alert('Application submitted! Our admin will review it and send your login credentials on WhatsApp once approved.');
+}
+
+function submitDelivery(){
+    const n = document.getElementById('dName').value.trim();
+    const email = document.getElementById('dEmail').value.trim();
+    const p = document.getElementById('dPhone').value.trim();
+    const w = document.getElementById('dWa').value.trim();
+    const city = document.getElementById('dCity').value.trim();
+    const skill = document.getElementById('dSkill').value;
+    const services = document.getElementById('dServices').value.trim();
+    const teamSize = document.getElementById('dTeamSize').value.trim();
+    const u = document.getElementById('dUpi').value.trim();
+    const e = document.getElementById('dExp').value.trim();
+    if(!n || !email || !w){ alert('Please fill name, email and WhatsApp'); return; }
+
+    const finalServices = services || skill || 'General';
+    const finalTeamSize = teamSize || '1';
+
+    submitPartnerApplication({name:n, email:email, whatsapp:w, services:finalServices, teamSize:finalTeamSize, experience:e});
+
+    const msg = `*NEW DELIVERY PARTNER APPLICATION*%0A%0AName: ${encodeURIComponent(n)}%0AEmail: ${encodeURIComponent(email)}%0APhone: ${encodeURIComponent(p)}%0AWhatsApp: ${encodeURIComponent(w)}%0ACity: ${encodeURIComponent(city)}%0AServices: ${encodeURIComponent(finalServices)}%0ATeam Size: ${encodeURIComponent(finalTeamSize)}%0AUPI: ${encodeURIComponent(u)}%0AExperience: ${encodeURIComponent(e)}`;
+    window.open(`https://wa.me/919717738735?text=${msg}`, '_blank');
+
+    closeDeliveryPopup();
+    ['dName','dEmail','dPhone','dWa','dCity','dServices','dTeamSize','dUpi','dExp'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('dSkill').value = '';
+    alert('Application submitted! Our admin will review it and send your login credentials on WhatsApp once approved.');
+}
+
+/* ---------------- popups (existing) ---------------- */
+function openCloserPopup(){ show('closerPopup'); }
+function closeCloserPopup(){ closeModal('closerPopup'); }
+function openDeliveryPopup(){ show('deliveryPopup'); }
+function closeDeliveryPopup(){ closeModal('deliveryPopup'); }
+
+function sendMail(e){
+    e.preventDefault();
+    const f = e.target;
+    const name = encodeURIComponent(f.name.value);
+    const email = encodeURIComponent(f.email.value);
+    const service = encodeURIComponent(f.service.value);
+    const message = encodeURIComponent(f.message.value);
+    const subject = `New project: ${service} - ${name}`;
+    const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AService: ${service}%0D%0A%0D%0A${message}`;
+    window.location.href = `mailto:creatorshubbod@gmail.com?subject=${subject}&body=${body}`;
+}
+
+/* ---------------- admin: approve / reject ---------------- */
+function approveCloserApp(appId){
+    const apps = loadDB(DB_KEYS.closerApps, []);
+    const app = apps.find(a => a.id === appId);
+    if(!app || app.status !== 'Pending') return;
+    app.status = 'Approved';
+    saveDB(DB_KEYS.closerApps, apps);
+
+    const username = genUsername('closer');
+    const password = genPassword();
+    const closers = loadDB(DB_KEYS.closers, []);
+    closers.push({
+        id:'C-'+username, appId, username, password, name:app.name, email:app.email,
+        whatsapp:app.whatsapp, experience:app.experience, approvedAt: new Date().toISOString()
+    });
+    saveDB(DB_KEYS.closers, closers);
+    renderAdmin();
+    alert(`Closer approved!\n\nUsername: ${username}\nPassword: ${password}\n\nShare these credentials with ${app.name}.`);
+}
+function rejectCloserApp(appId){
+    const apps = loadDB(DB_KEYS.closerApps, []);
+    const app = apps.find(a => a.id === appId);
+    if(!app) return;
+    app.status = 'Rejected';
+    saveDB(DB_KEYS.closerApps, apps);
+    renderAdmin();
+}
+function approvePartnerApp(appId){
+    const apps = loadDB(DB_KEYS.partnerApps, []);
+    const app = apps.find(a => a.id === appId);
+    if(!app || app.status !== 'Pending') return;
+    app.status = 'Approved';
+    saveDB(DB_KEYS.partnerApps, apps);
+
+    const username = genUsername('partner');
+    const password = genPassword();
+    const partners = loadDB(DB_KEYS.partners, []);
+    partners.push({
+        id:'P-'+username, appId, username, password, name:app.name, email:app.email,
+        whatsapp:app.whatsapp, services:app.services, teamSize:app.teamSize,
+        experience:app.experience, approvedAt: new Date().toISOString()
+    });
+    saveDB(DB_KEYS.partners, partners);
+    renderAdmin();
+    alert(`Delivery Partner approved!\n\nUsername: ${username}\nPassword: ${password}\n\nShare these credentials with ${app.name}.`);
+}
+function rejectPartnerApp(appId){
+    const apps = loadDB(DB_KEYS.partnerApps, []);
+    const app = apps.find(a => a.id === appId);
+    if(!app) return;
+    app.status = 'Rejected';
+    saveDB(DB_KEYS.partnerApps, apps);
+    renderAdmin();
+}
+function resetCloserPassword(username){
+    const closers = loadDB(DB_KEYS.closers, []);
+    const c = closers.find(x => x.username === username);
+    if(!c) return;
+    c.password = genPassword();
+    saveDB(DB_KEYS.closers, closers);
+    renderAdmin();
+    alert(`New password for ${username}: ${c.password}`);
+}
+function resetPartnerPassword(username){
+    const partners = loadDB(DB_KEYS.partners, []);
+    const pp = partners.find(x => x.username === username);
+    if(!pp) return;
+    pp.password = genPassword();
+    saveDB(DB_KEYS.partners, partners);
+    renderAdmin();
+    alert(`New password for ${username}: ${pp.password}`);
+}
+
+/* ---------------- admin: tab switching + rendering ---------------- */
+const ADMIN_TABS = ['overview','closerApps','partnerApps','closers','partners','leads','projects','freelancers','settings'];
+function switchAdminTab(tab){
+    ADMIN_TABS.forEach(t => {
+        const panel = document.getElementById('admin-'+t);
+        const btn = document.getElementById('adminTabBtn-'+t);
+        if(panel) panel.classList.toggle('hidden', t !== tab);
+        if(btn) btn.classList.toggle('active', t === tab);
+    });
+    renderAdmin();
+}
+
+function renderAdmin(){
+    const closerApps = loadDB(DB_KEYS.closerApps, []);
+    const partnerApps = loadDB(DB_KEYS.partnerApps, []);
+    const closers = loadDB(DB_KEYS.closers, []);
+    const partners = loadDB(DB_KEYS.partners, []);
+    const leads = loadDB(DB_KEYS.leads, []);
+    const projects = loadDB(DB_KEYS.projects, []);
+    const freelancers = loadDB(DB_KEYS.freelancers, []);
+
+    const pendingApprovals = closerApps.filter(a => a.status === 'Pending').length + partnerApps.filter(a => a.status === 'Pending').length;
+    const activeProjects = projects.filter(p => !['Completed','Cancelled'].includes(p.status)).length;
+    const completedProjects = projects.filter(p => p.status === 'Completed').length;
+    const totalRevenue = projects.filter(p => p.status === 'Completed').reduce((sum,p) => sum + Number(p.budget || 0), 0);
+
+    setText('statCloserApps', closerApps.length);
+    setText('statPartnerApps', partnerApps.length);
+    setText('statApprovedClosers', closers.length);
+    setText('statApprovedPartners', partners.length);
+    setText('statPendingApprovals', pendingApprovals);
+    setText('statTotalLeads', leads.length);
+    setText('statTotalProjects', projects.length);
+    setText('statActiveProjects', activeProjects);
+    setText('statCompletedProjects', completedProjects);
+    setText('statTotalRevenue', '$' + totalRevenue.toLocaleString());
+
+    renderCloserAppsTable(closerApps);
+    renderPartnerAppsTable(partnerApps);
+    renderClosersTable(closers, leads);
+    renderPartnersTable(partners, freelancers, projects);
+    renderLeadsTableAdmin(leads);
+    renderProjectsTableAdmin(projects);
+    renderFreelancersTableAdmin(freelancers);
+    populateProjectDropdowns();
+}
+
+function renderCloserAppsTable(apps){
+    const body = document.getElementById('adminCloserAppsBody');
+    if(!body) return;
+    body.innerHTML = apps.length ? apps.slice().reverse().map(a => `
+        <tr class="border-b border-white/5">
+            <td class="p-3 font-medium">${esc(a.name)}</td>
+            <td class="p-3 text-zinc-400">${esc(a.email)}</td>
+            <td class="p-3 text-zinc-400">${esc(a.whatsapp)}</td>
+            <td class="p-3 text-zinc-400 max-w-[220px] truncate" title="${esc(a.experience)}">${esc(a.experience || '—')}</td>
+            <td class="p-3">${statusBadge(a.status)}</td>
+            <td class="p-3 text-right space-x-1.5 whitespace-nowrap">
+                ${a.status === 'Pending' ? `
+                    <button onclick="approveCloserApp('${a.id}')" class="text-[11px] px-2.5 py-1.5 rounded-lg bg-emerald-500/15 text-emerald-300 hover:bg-emerald-500/25 transition">Approve</button>
+                    <button onclick="rejectCloserApp('${a.id}')" class="text-[11px] px-2.5 py-1.5 rounded-lg bg-red-500/15 text-red-300 hover:bg-red-500/25 transition">Reject</button>
+                ` : `<span class="text-zinc-500 text-[12px]">—</span>`}
+            </td>
+        </tr>`).join('') : `<tr><td colspan="6" class="p-8 text-center text-zinc-500">No closer applications yet.</td></tr>`;
+}
+
+function renderPartnerAppsTable(apps){
+    const body = document.getElementById('adminPartnerAppsBody');
+    if(!body) return;
+    body.innerHTML = apps.length ? apps.slice().reverse().map(a => `
+        <tr class="border-b border-white/5">
+            <td class="p-3 font-medium">${esc(a.name)}</td>
+            <td class="p-3 text-zinc-400">${esc(a.email)}</td>
+            <td class="p-3 text-zinc-400">${esc(a.whatsapp)}</td>
+            <td class="p-3 text-zinc-400">${esc(a.services)}</td>
+            <td class="p-3 text-zinc-400">${esc(a.teamSize)}</td>
+            <td class="p-3">${statusBadge(a.status)}</td>
+            <td class="p-3 text-right space-x-1.5 whitespace-nowrap">
+                ${a.status === 'Pending' ? `
+                    <button onclick="approvePartnerApp('${a.id}')" class="text-[11px] px-2.5 py-1.5 rounded-lg bg-emerald-500/15 text-emerald-300 hover:bg-emerald-500/25 transition">Approve</button>
+                    <button onclick="rejectPartnerApp('${a.id}')" class="text-[11px] px-2.5 py-1.5 rounded-lg bg-red-500/15 text-red-300 hover:bg-red-500/25 transition">Reject</button>
+                ` : `<span class="text-zinc-500 text-[12px]">—</span>`}
+            </td>
+        </tr>`).join('') : `<tr><td colspan="7" class="p-8 text-center text-zinc-500">No partner applications yet.</td></tr>`;
+}
+
+function renderClosersTable(closers, leads){
+    const body = document.getElementById('adminClosersBody');
+    if(!body) return;
+    body.innerHTML = closers.length ? closers.map(c => {
+        const myLeads = leads.filter(l => l.closerUsername === c.username);
+        const closed = myLeads.filter(l => l.status === 'Closed').length;
+        return `<tr class="border-b border-white/5">
+            <td class="p-3 font-medium">${esc(c.name)}</td>
+            <td class="p-3 text-zinc-400">${esc(c.email)}</td>
+            <td class="p-3 font-mono text-[12px]">${esc(c.username)}</td>
+            <td class="p-3 font-mono text-[12px] text-violet-300">${esc(c.password)}</td>
+            <td class="p-3 text-zinc-400">${myLeads.length} leads · ${closed} closed</td>
+            <td class="p-3 text-right">
+                <button onclick="resetCloserPassword('${c.username}')" class="text-[11px] px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition">Reset Password</button>
+            </td>
+        </tr>`;
+    }).join('') : `<tr><td colspan="6" class="p-8 text-center text-zinc-500">No approved closers yet.</td></tr>`;
+}
+
+function renderPartnersTable(partners, freelancers, projects){
+    const body = document.getElementById('adminPartnersBody');
+    if(!body) return;
+    body.innerHTML = partners.length ? partners.map(p => {
+        const myFreelancers = freelancers.filter(f => f.partnerUsername === p.username).length;
+        const myProjects = projects.filter(pr => pr.assignedPartner === p.username).length;
+        return `<tr class="border-b border-white/5">
+            <td class="p-3 font-medium">${esc(p.name)}</td>
+            <td class="p-3 text-zinc-400">${esc(p.email)}</td>
+            <td class="p-3 font-mono text-[12px]">${esc(p.username)}</td>
+            <td class="p-3 font-mono text-[12px] text-violet-300">${esc(p.password)}</td>
+            <td class="p-3 text-zinc-400">${myFreelancers}</td>
+            <td class="p-3 text-zinc-400">${myProjects}</td>
+            <td class="p-3 text-right">
+                <button onclick="resetPartnerPassword('${p.username}')" class="text-[11px] px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition">Reset Password</button>
+            </td>
+        </tr>`;
+    }).join('') : `<tr><td colspan="7" class="p-8 text-center text-zinc-500">No approved partners yet.</td></tr>`;
+}
+
+function renderLeadsTableAdmin(leads){
+    const body = document.getElementById('adminLeadsBody');
+    if(!body) return;
+    body.innerHTML = leads.length ? leads.slice().reverse().map(l => `
+        <tr class="border-b border-white/5">
+            <td class="p-3 font-medium">${esc(l.clientName)}</td>
+            <td class="p-3 text-zinc-400">${esc(l.contact)}</td>
+            <td class="p-3 text-zinc-400">${esc(l.service)}</td>
+            <td class="p-3">$${Number(l.value || 0).toLocaleString()}</td>
+            <td class="p-3 font-mono text-[12px] text-zinc-400">${esc(l.closerUsername)}</td>
+            <td class="p-3">${statusBadge(l.status)}</td>
+        </tr>`).join('') : `<tr><td colspan="6" class="p-8 text-center text-zinc-500">No leads yet.</td></tr>`;
+}
+
+function renderFreelancersTableAdmin(freelancers){
+    const body = document.getElementById('adminFreelancersBody');
+    if(!body) return;
+    body.innerHTML = freelancers.length ? freelancers.slice().reverse().map(f => `
+        <tr class="border-b border-white/5">
+            <td class="p-3 font-medium">${esc(f.name)}</td>
+            <td class="p-3 text-zinc-400">${esc(f.skill)}</td>
+            <td class="p-3 text-zinc-400">${esc(f.whatsapp)}</td>
+            <td class="p-3 font-mono text-[12px] text-zinc-400">${esc(f.partnerUsername)}</td>
+        </tr>`).join('') : `<tr><td colspan="4" class="p-8 text-center text-zinc-500">No freelancers added yet.</td></tr>`;
+}
+
+function renderProjectsTableAdmin(projects){
+    const body = document.getElementById('adminProjectsBody');
+    if(!body) return;
+    body.innerHTML = projects.length ? projects.slice().reverse().map(p => `
+        <tr class="border-b border-white/5">
+            <td class="p-3 font-mono text-[12px]">${esc(p.id)}</td>
+            <td class="p-3 font-medium">${esc(p.clientName)}</td>
+            <td class="p-3 text-zinc-400">${esc(p.service)}</td>
+            <td class="p-3">$${Number(p.budget || 0).toLocaleString()}</td>
+            <td class="p-3 font-mono text-[12px] text-zinc-400">${p.assignedCloser ? esc(p.assignedCloser) : '—'}</td>
+            <td class="p-3 font-mono text-[12px] text-zinc-400">${p.assignedPartner ? esc(p.assignedPartner) : '—'}</td>
+            <td class="p-3">${statusBadge(p.status)}</td>
+            <td class="p-3 text-right space-x-1.5 whitespace-nowrap">
+                <button onclick="openProjectModal('admin','${p.id}')" class="text-[11px] px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition">Edit</button>
+                <button onclick="deleteProject('${p.id}')" class="text-[11px] px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-red-500/20 text-zinc-400 transition">✕</button>
+            </td>
+        </tr>`).join('') : `<tr><td colspan="8" class="p-8 text-center text-zinc-500">No projects yet.</td></tr>`;
+}
+
+function populateProjectDropdowns(){
+    const closers = loadDB(DB_KEYS.closers, []);
+    const partners = loadDB(DB_KEYS.partners, []);
+    const cSel = document.getElementById('projectAssignedCloser');
+    const pSel = document.getElementById('projectAssignedPartner');
+    const stSel = document.getElementById('projectStatusSelect');
+    if(cSel) cSel.innerHTML = `<option value="">Unassigned</option>` + closers.map(c => `<option value="${esc(c.username)}">${esc(c.name)} (${esc(c.username)})</option>`).join('');
+    if(pSel) pSel.innerHTML = `<option value="">Unassigned</option>` + partners.map(p => `<option value="${esc(p.username)}">${esc(p.name)} (${esc(p.username)})</option>`).join('');
+    if(stSel) stSel.innerHTML = PROJECT_STATUSES.map(s => `<option value="${s}">${s}</option>`).join('');
+}
+
+/* ---------------- admin settings ---------------- */
+function changeAdminPassword(){
+    const cur = document.getElementById('settingsCurrentPassword').value;
+    const next = document.getElementById('settingsNewPassword').value;
+    const confirmP = document.getElementById('settingsConfirmPassword').value;
+    const admin = loadDB(DB_KEYS.admin, {username:'admin', password:'admin123'});
+    const msgEl = document.getElementById('settingsMsg');
+
+    if(cur !== admin.password){ msgEl.textContent = 'Current password is incorrect.'; msgEl.className = 'text-sm mt-3 text-red-400'; return; }
+    if(!next || next.length < 6){ msgEl.textContent = 'New password must be at least 6 characters.'; msgEl.className = 'text-sm mt-3 text-red-400'; return; }
+    if(next !== confirmP){ msgEl.textContent = 'Passwords do not match.'; msgEl.className = 'text-sm mt-3 text-red-400'; return; }
+
+    admin.password = next;
+    saveDB(DB_KEYS.admin, admin);
+    msgEl.textContent = 'Password updated successfully.';
+    msgEl.className = 'text-sm mt-3 text-emerald-400';
+    document.getElementById('settingsCurrentPassword').value = '';
+    document.getElementById('settingsNewPassword').value = '';
+    document.getElementById('settingsConfirmPassword').value = '';
+}
+
+/* ---------------- closer dashboard: leads ---------------- */
+let editingLeadId = null;
+
+function openLeadModal(id){
+    editingLeadId = id || null;
+    const leads = loadDB(DB_KEYS.leads, []);
+    const lead = id ? leads.find(l => l.id === id) : null;
+    document.getElementById('leadModalTitle').textContent = lead ? 'Edit Lead' : 'Add Lead';
+    document.getElementById('leadClientName').value = lead ? lead.clientName : '';
+    document.getElementById('leadContact').value = lead ? lead.contact : '';
+    document.getElementById('leadService').value = lead ? lead.service : '';
+    document.getElementById('leadValue').value = lead ? lead.value : '';
+    document.getElementById('leadStatus').value = lead ? lead.status : 'Pending';
+    show('leadModal');
+}
+
+function saveLead(){
+    const s = getSession();
+    const clientName = document.getElementById('leadClientName').value.trim();
+    const contact = document.getElementById('leadContact').value.trim();
+    const service = document.getElementById('leadService').value.trim();
+    const value = document.getElementById('leadValue').value;
+    const status = document.getElementById('leadStatus').value;
+    if(!clientName || !contact){ alert('Please fill client name and contact.'); return; }
+
+    const leads = loadDB(DB_KEYS.leads, []);
+    if(editingLeadId){
+        const lead = leads.find(l => l.id === editingLeadId);
+        if(lead) Object.assign(lead, {clientName, contact, service, value, status, updatedAt: new Date().toISOString()});
+    } else {
+        leads.push({
+            id:'LD' + Date.now() + Math.floor(Math.random()*1000), closerUsername: s.username,
+            clientName, contact, service, value, status, createdAt: new Date().toISOString()
+        });
+    }
+    saveDB(DB_KEYS.leads, leads);
+    closeModal('leadModal');
+    renderCloser();
+}
+
+function setLeadStatus(id, status){
+    const leads = loadDB(DB_KEYS.leads, []);
+    const lead = leads.find(l => l.id === id);
+    if(!lead) return;
+    lead.status = status;
+    lead.updatedAt = new Date().toISOString();
+    saveDB(DB_KEYS.leads, leads);
+    renderCloser();
+}
+
+function deleteLead(id){
+    if(!confirm('Delete this lead?')) return;
+    let leads = loadDB(DB_KEYS.leads, []);
+    leads = leads.filter(l => l.id !== id);
+    saveDB(DB_KEYS.leads, leads);
+    renderCloser();
+}
+
+function renderCloser(){
+    const s = getSession();
+    if(!s) return;
+    setText('closerWelcomeName', s.name);
+    const leads = loadDB(DB_KEYS.leads, []).filter(l => l.closerUsername === s.username);
+    const total = leads.length;
+    const closed = leads.filter(l => l.status === 'Closed');
+    const pendingCount = leads.filter(l => l.status === 'Pending').length;
+    const conv = total ? Math.round((closed.length / total) * 100) : 0;
+    const commission = closed.reduce((sum,l) => sum + (Number(l.value || 0) * COMMISSION_RATE), 0);
+
+    setText('closerStatTotal', total);
+    setText('closerStatClosed', closed.length);
+    setText('closerStatPending', pendingCount);
+    setText('closerStatConversion', conv + '%');
+    setText('closerStatCommission', '$' + commission.toLocaleString());
+
+    const body = document.getElementById('closerLeadsBody');
+    body.innerHTML = leads.length ? leads.slice().reverse().map(l => `
+        <tr class="border-b border-white/5">
+            <td class="p-3 font-medium">${esc(l.clientName)}</td>
+            <td class="p-3 text-zinc-400">${esc(l.contact)}</td>
+            <td class="p-3 text-zinc-400">${esc(l.service)}</td>
+            <td class="p-3">$${Number(l.value || 0).toLocaleString()}</td>
+            <td class="p-3">${statusBadge(l.status)}</td>
+            <td class="p-3 text-right space-x-1.5 whitespace-nowrap">
+                <button onclick="setLeadStatus('${l.id}','Closed')" class="text-[11px] px-2 py-1 rounded-lg bg-emerald-500/15 text-emerald-300 hover:bg-emerald-500/25 transition">Closed</button>
+                <button onclick="setLeadStatus('${l.id}','Pending')" class="text-[11px] px-2 py-1 rounded-lg bg-amber-500/15 text-amber-300 hover:bg-amber-500/25 transition">Pending</button>
+                <button onclick="setLeadStatus('${l.id}','Lost')" class="text-[11px] px-2 py-1 rounded-lg bg-red-500/15 text-red-300 hover:bg-red-500/25 transition">Lost</button>
+                <button onclick="openLeadModal('${l.id}')" class="text-[11px] px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 transition">Edit</button>
+                <button onclick="deleteLead('${l.id}')" class="text-[11px] px-2 py-1 rounded-lg bg-white/5 hover:bg-red-500/20 text-zinc-400 transition">✕</button>
+            </td>
+        </tr>`).join('') : `<tr><td colspan="6" class="p-8 text-center text-zinc-500">No leads yet. Click "+ Add Lead" to get started.</td></tr>`;
+}
+
+/* ---------------- partner dashboard: freelancers + projects ---------------- */
+let editingFreelancerId = null;
+
+function openFreelancerModal(id){
+    editingFreelancerId = id || null;
+    const list = loadDB(DB_KEYS.freelancers, []);
+    const f = id ? list.find(x => x.id === id) : null;
+    document.getElementById('freelancerModalTitle').textContent = f ? 'Edit Freelancer' : 'Add Freelancer';
+    document.getElementById('freelancerName').value = f ? f.name : '';
+    document.getElementById('freelancerSkill').value = f ? f.skill : '';
+    document.getElementById('freelancerWhatsapp').value = f ? f.whatsapp : '';
+    show('freelancerModal');
+}
+
+function saveFreelancer(){
+    const s = getSession();
+    const name = document.getElementById('freelancerName').value.trim();
+    const skill = document.getElementById('freelancerSkill').value.trim();
+    const whatsapp = document.getElementById('freelancerWhatsapp').value.trim();
+    if(!name || !skill){ alert('Please fill name and skill.'); return; }
+
+    const list = loadDB(DB_KEYS.freelancers, []);
+    if(editingFreelancerId){
+        const f = list.find(x => x.id === editingFreelancerId);
+        if(f) Object.assign(f, {name, skill, whatsapp});
+    } else {
+        list.push({id:'FL' + Date.now() + Math.floor(Math.random()*1000), partnerUsername: s.username, name, skill, whatsapp, addedAt: new Date().toISOString()});
+    }
+    saveDB(DB_KEYS.freelancers, list);
+    closeModal('freelancerModal');
+    renderPartner();
+}
+
+function deleteFreelancer(id){
+    if(!confirm('Remove this freelancer?')) return;
+    let list = loadDB(DB_KEYS.freelancers, []);
+    list = list.filter(x => x.id !== id);
+    saveDB(DB_KEYS.freelancers, list);
+    renderPartner();
+}
+
+let editingProjectId = null;
+let projectModalContext = 'admin';
+
+function openProjectModal(context, id){
+    projectModalContext = context;
+    editingProjectId = id || null;
+    const projects = loadDB(DB_KEYS.projects, []);
+    const p = id ? projects.find(x => x.id === id) : null;
+
+    document.getElementById('projectModalTitle').textContent = p ? 'Edit Project' : 'Add Project';
+    document.getElementById('projectClientName').value = p ? p.clientName : '';
+    document.getElementById('projectService').value = p ? p.service : '';
+    document.getElementById('projectBudget').value = p ? p.budget : '';
+
+    populateProjectDropdowns();
+
+    document.getElementById('projectAssignedCloser').value = p ? (p.assignedCloser || '') : '';
+
+    const partnerSelect = document.getElementById('projectAssignedPartner');
+    if(context === 'partner'){
+        const s = getSession();
+        partnerSelect.value = s.username;
+        partnerSelect.disabled = true;
+    } else {
+        partnerSelect.disabled = false;
+        partnerSelect.value = p ? (p.assignedPartner || '') : '';
+    }
+
+    document.getElementById('projectStatusSelect').value = p ? p.status : 'New Lead';
+    show('projectModal');
+}
+
+function saveProject(){
+    const clientName = document.getElementById('projectClientName').value.trim();
+    const service = document.getElementById('projectService').value.trim();
+    const budget = document.getElementById('projectBudget').value;
+    const assignedCloser = document.getElementById('projectAssignedCloser').value;
+    const assignedPartner = document.getElementById('projectAssignedPartner').value;
+    const status = document.getElementById('projectStatusSelect').value;
+    if(!clientName || !service){ alert('Please fill client name and service.'); return; }
+
+    const projects = loadDB(DB_KEYS.projects, []);
+    if(editingProjectId){
+        const p = projects.find(x => x.id === editingProjectId);
+        if(p){
+            const prevStatus = p.status;
+            Object.assign(p, {clientName, service, budget, assignedCloser, assignedPartner, status});
+            if(status !== prevStatus){
+                p.statusHistory = p.statusHistory || [];
+                p.statusHistory.push({status, at: new Date().toISOString()});
+            }
         }
-        function openCloserPopup(){document.getElementById('closerPopup').classList.remove('hidden');document.getElementById('closerPopup').classList.add('flex')}
-        function closeCloserPopup(){document.getElementById('closerPopup').classList.add('hidden');document.getElementById('closerPopup').classList.remove('flex')}
-        function submitCloser(){
-            const n=document.getElementById('cName').value;
-            const p=document.getElementById('cPhone').value;
-            const w=document.getElementById('cWa').value;
-            const u=document.getElementById('cUpi').value;
-            const pp=document.getElementById('cPaypal').value;
-            const e=document.getElementById('cExp').value;
-            if(!n||!p||!w){alert('Please fill name, phone and WhatsApp');return}
-            const msg=`*NEW CLOSER APPLICATION*%0A%0AName: ${encodeURIComponent(n)}%0APhone: ${p}%0AWhatsApp: ${w}%0AUPI: ${encodeURIComponent(u)}%0APayPal: ${encodeURIComponent(pp)}%0AExperience: ${encodeURIComponent(e)}`;
-            window.open(`https://wa.me/919717738735?text=${msg}`,'_blank');
-            closeCloserPopup();
-            alert('Application sent to WhatsApp!');
-        }
-        function openDeliveryPopup(){document.getElementById('deliveryPopup').classList.remove('hidden');document.getElementById('deliveryPopup').classList.add('flex')}
-        function closeDeliveryPopup(){document.getElementById('deliveryPopup').classList.add('hidden');document.getElementById('deliveryPopup').classList.remove('flex')}
-        function submitDelivery(){
-            const n=document.getElementById('dName').value;
-            const p=document.getElementById('dPhone').value;
-            const w=document.getElementById('dWa').value;
-            const city=document.getElementById('dCity').value;
-            const skill=document.getElementById('dSkill').value;
-            const u=document.getElementById('dUpi').value;
-            const e=document.getElementById('dExp').value;
-            if(!n||!p||!w){alert('Please fill name, phone and WhatsApp');return}
-            const msg=`*NEW DELIVERY PARTNER APPLICATION*%0A%0AName: ${encodeURIComponent(n)}%0APhone: ${p}%0AWhatsApp: ${w}%0ACity: ${encodeURIComponent(city)}%0ASkill: ${encodeURIComponent(skill)}%0AUPI: ${encodeURIComponent(u)}%0AExperience: ${encodeURIComponent(e)}`;
-            window.open(`https://wa.me/919717738735?text=${msg}`,'_blank');
-            closeDeliveryPopup();
-            alert('Application sent to WhatsApp!');
-        }
-    </script>
+    } else {
+        projects.push({
+            id: genProjectId(), clientName, service, budget, assignedCloser, assignedPartner, status,
+            createdAt: new Date().toISOString(), statusHistory:[{status, at: new Date().toISOString()}]
+        });
+    }
+    saveDB(DB_KEYS.projects, projects);
+    closeModal('projectModal');
+    if(projectModalContext === 'admin') renderAdmin(); else renderPartner();
+}
+
+function updateProjectStatus(id, status){
+    const projects = loadDB(DB_KEYS.projects, []);
+    const p = projects.find(x => x.id === id);
+    if(!p) return;
+    p.status = status;
+    p.statusHistory = p.statusHistory || [];
+    p.statusHistory.push({status, at: new Date().toISOString()});
+    saveDB(DB_KEYS.projects, projects);
+    const s = getSession();
+    if(s.role === 'admin') renderAdmin(); else renderPartner();
+}
+
+function deleteProject(id){
+    if(!confirm('Delete this project?')) return;
+    let projects = loadDB(DB_KEYS.projects, []);
+    projects = projects.filter(x => x.id !== id);
+    saveDB(DB_KEYS.projects, projects);
+    renderAdmin();
+}
+
+function renderPartner(){
+    const s = getSession();
+    if(!s) return;
+    setText('partnerWelcomeName', s.name);
+
+    const freelancers = loadDB(DB_KEYS.freelancers, []).filter(f => f.partnerUsername === s.username);
+    const projects = loadDB(DB_KEYS.projects, []).filter(p => p.assignedPartner === s.username);
+    const active = projects.filter(p => !['Completed','Cancelled'].includes(p.status)).length;
+    const completed = projects.filter(p => p.status === 'Completed').length;
+
+    setText('partnerStatActive', active);
+    setText('partnerStatCompleted', completed);
+    setText('partnerStatFreelancers', freelancers.length);
+
+    const fBody = document.getElementById('partnerFreelancersBody');
+    fBody.innerHTML = freelancers.length ? freelancers.slice().reverse().map(f => `
+        <tr class="border-b border-white/5">
+            <td class="p-3 font-medium">${esc(f.name)}</td>
+            <td class="p-3 text-zinc-400">${esc(f.skill)}</td>
+            <td class="p-3 text-zinc-400">${esc(f.whatsapp)}</td>
+            <td class="p-3 text-right space-x-1.5 whitespace-nowrap">
+                <button onclick="openFreelancerModal('${f.id}')" class="text-[11px] px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition">Edit</button>
+                <button onclick="deleteFreelancer('${f.id}')" class="text-[11px] px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-red-500/20 text-zinc-400 transition">Remove</button>
+            </td>
+        </tr>`).join('') : `<tr><td colspan="4" class="p-8 text-center text-zinc-500">No freelancers yet. Click "+ Add Freelancer" to get started.</td></tr>`;
+
+    const pBody = document.getElementById('partnerProjectsBody');
+    pBody.innerHTML = projects.length ? projects.slice().reverse().map(p => `
+        <tr class="border-b border-white/5">
+            <td class="p-3 font-mono text-[12px]">${esc(p.id)}</td>
+            <td class="p-3 font-medium">${esc(p.clientName)}</td>
+            <td class="p-3 text-zinc-400">${esc(p.service)}</td>
+            <td class="p-3">$${Number(p.budget || 0).toLocaleString()}</td>
+            <td class="p-3 font-mono text-[12px] text-zinc-400">${p.assignedCloser ? esc(p.assignedCloser) : '—'}</td>
+            <td class="p-3">
+                <select onchange="updateProjectStatus('${p.id}', this.value)" class="bg-black/40 border border-white/10 rounded-lg px-2 py-1.5 text-[12px]">
+                    ${PROJECT_STATUSES.map(st => `<option value="${st}" ${st === p.status ? 'selected' : ''}>${st}</option>`).join('')}
+                </select>
+            </td>
+        </tr>`).join('') : `<tr><td colspan="6" class="p-8 text-center text-zinc-500">No projects yet. Click "+ Add Project" to get started.</td></tr>`;
+}
+
+/* ---------------- init ---------------- */
+document.addEventListener('DOMContentLoaded', () => {
+    initDB();
+    const s = getSession();
+    if(s) enterApp();
+});
+</script>
 </body>
 </html>
-UPGRADE THE EXISTING SINGLE-FILE HTML INTO A COMPLETE ROLE-BASED AGENCY MANAGEMENT SYSTEM.
