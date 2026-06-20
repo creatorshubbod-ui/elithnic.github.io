@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creator's Hub - Agency OS</title>
+    <title>ABC XYZ — Creator's Hub | Agency OS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background: #050508; }
-     .gradient-text { background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-     .mesh { background: radial-gradient(at 20% 20%, rgba(59,130,246,0.3) 0px, transparent 50%), radial-gradient(at 80% 20%, rgba(139,92,246,0.25) 0px, transparent 50%), radial-gradient(at 50% 80%, rgba(236,72,153,0.2) 0px, transparent 50%); }
-     .card { transition: all 0.3s ease; }
-     .card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.5); }
-     .modal { backdrop-filter: blur(12px); }
-     .status-badge { font-size: 11px; padding: 3px 10px; border-radius: 999px; font-weight: 500; display: inline-block; }
-     .status-pending { background: rgba(251,191,36,0.15); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
-     .status-approved { background: rgba(52,211,153,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
-     .status-rejected { background: rgba(248,113,113,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
-     .status-new-lead { background: rgba(96,165,250,0.15); color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); }
-     .status-in-progress { background: rgba(167,139,250,0.15); color: #a78bfa; border: 1px solid rgba(167,139,250,0.3); }
-     .status-completed { background: rgba(52,211,153,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
-     .status-cancelled { background: rgba(156,163,175,0.15); color: #9ca3af; border: 1px solid rgba(156,163,175,0.3); }
-     .hidden-section { display: none!important; }
-     .tab-active { background: rgba(139,92,246,0.2); border-color: rgba(139,92,246,0.5); color: white; }
+    .gradient-text { background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .mesh { background: radial-gradient(at 20% 20%, rgba(59,130,246,0.3) 0px, transparent 50%), radial-gradient(at 80% 20%, rgba(139,92,246,0.25) 0px, transparent 50%), radial-gradient(at 50% 80%, rgba(236,72,153,0.2) 0px, transparent 50%); }
+    .card { transition: all 0.3s ease; }
+    .card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.5); }
+    .modal { backdrop-filter: blur(12px); }
+    .status-badge { font-size: 11px; padding: 3px 10px; border-radius: 999px; font-weight: 500; display: inline-block; }
+    .status-pending { background: rgba(251,191,36,0.15); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+    .status-approved { background: rgba(52,211,153,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
+    .status-rejected { background: rgba(248,113,113,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
+    .status-new-lead { background: rgba(96,165,250,0.15); color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); }
+    .status-in-progress { background: rgba(167,139,250,0.15); color: #a78bfa; border: 1px solid rgba(167,139,250,0.3); }
+    .status-completed { background: rgba(52,211,153,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
+    .hidden-section { display: none!important; }
+    .tab-active { background: rgba(139,92,246,0.2); border-color: rgba(139,92,246,0.5); color: white; }
+    .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
     </style>
 </head>
-<body class="text-zinc-100 antialiased selection:bg-violet-500/30 selection:text-violet-200">
+<body class="text-zinc-100 antialiased selection:bg-violet-500/30">
 
     <!-- MAIN SITE -->
     <div id="mainSite">
@@ -37,14 +37,17 @@
                         <div class="font-semibold text- leading-none tracking-tight">Creator's Hub</div>
                         <div class="text- text-zinc-500 leading-none mt-1">ABC XYZ • @weskerskennedy</div>
                     </div>
+                </div>
                 <div class="hidden md:flex items-center gap-7 text- text-zinc-300">
                     <a href="#services" class="hover:text-white transition">Services</a>
                     <a href="#work" class="hover:text-white transition">Work</a>
+                    <a href="#pricing" class="hover:text-white transition">Pricing</a>
                     <a href="#delivery-partner" class="hover:text-white transition">Delivery Partner</a>
                 </div>
                 <div class="flex items-center gap-2">
                     <button onclick="openLoginModal()" class="px-4 py-2 rounded-full bg-zinc-800 text-white text-sm font-medium hover:bg-zinc-700 transition border border-white/10">Login</button>
                     <button onclick="openCloserPopup()" class="hidden sm:inline-flex px-4 py-2 rounded-full bg-violet-600 text-white text-sm font-medium hover:bg-violet-500 transition">Apply as Closer</button>
+                    <a href="https://wa.me/919717738735?text=Hi%2C%20I%20am%20interested%20in%20your%20services" target="_blank" class="inline-flex px-4 py-2 rounded-full bg-[#25D366] text-black text-sm font-semibold hover:opacity-90 transition">WhatsApp</a>
                 </div>
             </div>
         </nav>
@@ -62,10 +65,11 @@
                         I Build Brands That
                         <span class="gradient-text block">Scale in the US Market</span>
                     </h1>
-                    <p class="text-lg sm:text-xl text-zinc-400 max-w-2xl leading-relaxed mb-10">SMMA • SaaS • Lead Gen • Websites • Shopify & Content. US-quality execution at India pricing.</p>
+                    <p class="text-lg sm:text-xl text-zinc-400 max-w-2xl leading-relaxed mb-10">SMMA • SaaS • Lead Gen • Websites • Shopify & Content. US-quality execution at India pricing. Fast shipping, daily updates, no BS.</p>
                     <div class="flex flex-col sm:flex-row gap-3">
-                        <button onclick="openLoginModal()" class="px-7 py-4 rounded-2xl bg-white text-black font-semibold text- hover:bg-zinc-200 transition flex items-center justify-center gap-2">Login to Dashboard</button>
+                        <button onclick="openLoginModal()" class="px-7 py-4 rounded-2xl bg-white text-black font-semibold text- hover:bg-zinc-200 transition flex items-center justify-center gap-2 shadow-xl shadow-white/5">Login to Dashboard</button>
                         <button onclick="openCloserPopup()" class="px-7 py-4 rounded-2xl bg-violet-600 text-white font-semibold text- hover:bg-violet-500 transition">Apply as Closer</button>
+                        <a href="https://wa.me/919717738735?text=Hi%2C%20I%20am%20interested" target="_blank" class="px-7 py-4 rounded-2xl bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 text-white font-semibold text- transition flex items-center justify-center gap-2">WhatsApp Me</a>
                     </div>
                 </div>
             </div>
@@ -78,6 +82,44 @@
                     <div class="card bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 border border-white/10 rounded- p-7"><h3 class="text-xl font-semibold mb-1">SMMA</h3><p class="text-sm text-zinc-500 mb-4">Social media marketing & ads</p><div class="text-2xl font-bold">$599/mo to $1,499/mo</div></div>
                     <div class="card bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 border border-white/10 rounded- p-7"><h3 class="text-xl font-semibold mb-1">SaaS Development</h3><p class="text-sm text-zinc-500 mb-4">MVP to launch in weeks</p><div class="text-2xl font-bold">$1,500 to $2,500</div></div>
                     <div class="card bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 border border-white/10 rounded- p-7"><h3 class="text-xl font-semibold mb-1">Lead Generation</h3><p class="text-sm text-zinc-500 mb-4">Qualified calls, not lists</p><div class="text-2xl font-bold">$100/mo to $499/mo</div></div>
+                    <div class="card bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 border border-white/10 rounded- p-7"><h3 class="text-xl font-semibold mb-1">Websites</h3><p class="text-sm text-zinc-500 mb-4">Fast, SEO-ready, scalable</p><div class="text-2xl font-bold">₹30,000 to ₹2L</div></div>
+                    <div class="card bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 border border-white/10 rounded- p-7"><h3 class="text-xl font-semibold mb-1">Logo & Branding</h3><p class="text-sm text-zinc-500 mb-4">Clean, modern, US-ready</p><div class="text-2xl font-bold">$100 flat</div></div>
+                    <div class="card bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 border border-white/10 rounded- p-7"><h3 class="text-xl font-semibold mb-1">Short Videos</h3><p class="text-sm text-zinc-500 mb-4">Reels, Shorts, TikToks</p><div class="text-2xl font-bold">$10/reel or $140/mo</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="work" class="py-24 border-y border-white/5 bg-zinc-950/70">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl sm:text-5xl font-black tracking-tighter mb-12">Selected Work</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="group relative overflow-hidden rounded- border border-white/10 bg-zinc-900">
+                        <img src="https://images.unsplash.com/photo-1555421689-3f034debb7a6?q=80&w=1600" class="w-full aspect-[4/3] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-0 p-6">
+                            <div class="text- uppercase tracking-widest text-zinc-400 mb-2">Shopify • Austin TX</div>
+                            <h3 class="text-xl font-semibold">DTC Skincare Store</h3>
+                            <p class="text-sm text-zinc-300 mt-1">Delivered in 10 days → $4k first month</p>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden rounded- border border-white/10 bg-zinc-900">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1600" class="w-full aspect-[4/3] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-0 p-6">
+                            <div class="text- uppercase tracking-widest text-zinc-400 mb-2">SaaS • Miami FL</div>
+                            <h3 class="text-xl font-semibold">Fintech MVP</h3>
+                            <p class="text-sm text-zinc-300 mt-1">$1,500 build, investor-ready in 3 weeks</p>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden rounded- border border-white/10 bg-zinc-900">
+                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1600" class="w-full aspect-[4/3] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-0 p-6">
+                            <div class="text- uppercase tracking-widest text-zinc-400 mb-2">Lead Gen • Dallas TX</div>
+                            <h3 class="text-xl font-semibold">Coaching Business</h3>
+                            <p class="text-sm text-zinc-300 mt-1">47 qualified calls in 30 days ($499)</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -91,6 +133,10 @@
                 </div>
             </div>
         </section>
+
+        <footer class="py-10 border-t border-white/5 text-center text- text-zinc-500">
+            <div>© 2026 Creator's Hub, Gurugram, India | @weskerskennedy</div>
+        </footer>
     </div>
 
     <!-- DASHBOARDS -->
@@ -114,39 +160,20 @@
         <!-- ADMIN DASHBOARD -->
         <div id="adminDashboard" class="hidden-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <h1 class="text-3xl font-black mb-8">Admin Dashboard</h1>
-
             <div class="dashboard-grid mb-8">
-                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5">
-                    <div class="text-xs text-zinc-500 mb-1">Total Closers</div>
-                    <div class="text-3xl font-bold" id="statClosers">0</div>
-                </div>
-                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5">
-                    <div class="text-xs text-zinc-500 mb-1">Total Partners</div>
-                    <div class="text-3xl font-bold" id="statPartners">0</div>
-                </div>
-                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5">
-                    <div class="text-xs text-zinc-500 mb-1">Pending Approvals</div>
-                    <div class="text-3xl font-bold text-amber-400" id="statPending">0</div>
-                </div>
-                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5">
-                    <div class="text-xs text-zinc-500 mb-1">Total Leads</div>
-                    <div class="text-3xl font-bold" id="statLeads">0</div>
-                </div>
-                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5">
-                    <div class="text-xs text-zinc-500 mb-1">Active Projects</div>
-                    <div class="text-3xl font-bold text-violet-400" id="statActiveProjects">0</div>
-                </div>
-                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5">
-                    <div class="text-xs text-zinc-500 mb-1">Completed</div>
-                    <div class="text-3xl font-bold text-emerald-400" id="statCompleted">0</div>
-                </div>
+                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5"><div class="text-xs text-zinc-500 mb-1">Total Closers</div><div class="text-3xl font-bold" id="statClosers">0</div></div>
+                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5"><div class="text-xs text-zinc-500 mb-1">Total Partners</div><div class="text-3xl font-bold" id="statPartners">0</div></div>
+                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5"><div class="text-xs text-zinc-500 mb-1">Pending Approvals</div><div class="text-3xl font-bold text-amber-400" id="statPending">0</div></div>
+                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5"><div class="text-xs text-zinc-500 mb-1">Total Leads</div><div class="text-3xl font-bold" id="statLeads">0</div></div>
+                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5"><div class="text-xs text-zinc-500 mb-1">Active Projects</div><div class="text-3xl font-bold text-violet-400" id="statActiveProjects">0</div></div>
+                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5"><div class="text-xs text-zinc-500 mb-1">Completed</div><div class="text-3xl font-bold text-emerald-400" id="statCompleted">0</div></div>
             </div>
 
-            <div class="flex gap-3 mb-6 border-b border-white/10">
-                <button onclick="showAdminTab('applications')" id="tab-applications" class="px-4 py-2 text-sm font-medium border-b-2 border-violet-500">Applications</button>
-                <button onclick="showAdminTab('leads')" id="tab-leads" class="px-4 py-2 text-sm font-medium text-zinc-400 hover:text-white">All Leads</button>
-                <button onclick="showAdminTab('projects')" id="tab-projects" class="px-4 py-2 text-sm font-medium text-zinc-400 hover:text-white">All Projects</button>
-                <button onclick="showAdminTab('users')" id="tab-users" class="px-4 py-2 text-sm font-medium text-zinc-400 hover:text-white">Users</button>
+            <div class="flex gap-3 mb-6 border-b border-white/10 overflow-x-auto">
+                <button onclick="showAdminTab('applications')" id="tab-applications" class="px-4 py-2 text-sm font-medium border-b-2 border-violet-500 whitespace-nowrap">Applications</button>
+                <button onclick="showAdminTab('leads')" id="tab-leads" class="px-4 py-2 text-sm font-medium text-zinc-400 hover:text-white whitespace-nowrap">All Leads</button>
+                <button onclick="showAdminTab('projects')" id="tab-projects" class="px-4 py-2 text-sm font-medium text-zinc-400 hover:text-white whitespace-nowrap">All Projects</button>
+                <button onclick="showAdminTab('users')" id="tab-users" class="px-4 py-2 text-sm font-medium text-zinc-400 hover:text-white whitespace-nowrap">Users</button>
             </div>
 
             <div id="admin-applications" class="admin-tab-content">
@@ -173,24 +200,11 @@
         <!-- CLOSER DASHBOARD -->
         <div id="closerDashboard" class="hidden-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <h1 class="text-3xl font-black mb-8">Closer Dashboard</h1>
-
             <div class="dashboard-grid mb-8">
-                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5">
-                    <div class="text-xs text-zinc-500 mb-1">Leads Assigned</div>
-                    <div class="text-3xl font-bold" id="closerStatAssigned">0</div>
-                </div>
-                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5">
-                    <div class="text-xs text-zinc-500 mb-1">Leads Closed</div>
-                    <div class="text-3xl font-bold text-emerald-400" id="closerStatClosed">0</div>
-                </div>
-                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5">
-                    <div class="text-xs text-zinc-500 mb-1">Pending</div>
-                    <div class="text-3xl font-bold text-amber-400" id="closerStatPending">0</div>
-                </div>
-                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5">
-                    <div class="text-xs text-zinc-500 mb-1">Commission Earned</div>
-                    <div class="text-3xl font-bold text-violet-400">$<span id="closerStatCommission">0</span></div>
-                </div>
+                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5"><div class="text-xs text-zinc-500 mb-1">Leads Assigned</div><div class="text-3xl font-bold" id="closerStatAssigned">0</div></div>
+                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5"><div class="text-xs text-zinc-500 mb-1">Leads Closed</div><div class="text-3xl font-bold text-emerald-400" id="closerStatClosed">0</div></div>
+                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5"><div class="text-xs text-zinc-500 mb-1">Pending</div><div class="text-3xl font-bold text-amber-400" id="closerStatPending">0</div></div>
+                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5"><div class="text-xs text-zinc-500 mb-1">Commission Earned</div><div class="text-3xl font-bold text-violet-400">$<span id="closerStatCommission">0</span></div></div>
             </div>
 
             <div class="bg-zinc-900 border border-white/10 rounded-2xl p-6 mb-6">
@@ -211,20 +225,10 @@
         <!-- PARTNER DASHBOARD -->
         <div id="partnerDashboard" class="hidden-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <h1 class="text-3xl font-black mb-8">Delivery Partner Dashboard</h1>
-
             <div class="dashboard-grid mb-8">
-                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5">
-                    <div class="text-xs text-zinc-500 mb-1">Active Projects</div>
-                    <div class="text-3xl font-bold text-violet-400" id="partnerStatActive">0</div>
-                </div>
-                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5">
-                    <div class="text-xs text-zinc-500 mb-1">Completed</div>
-                    <div class="text-3xl font-bold text-emerald-400" id="partnerStatCompleted">0</div>
-                </div>
-                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5">
-                    <div class="text-xs text-zinc-500 mb-1">Freelancers</div>
-                    <div class="text-3xl font-bold" id="partnerStatFreelancers">0</div>
-                </div>
+                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5"><div class="text-xs text-zinc-500 mb-1">Active Projects</div><div class="text-3xl font-bold text-violet-400" id="partnerStatActive">0</div></div>
+                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5"><div class="text-xs text-zinc-500 mb-1">Completed</div><div class="text-3xl font-bold text-emerald-400" id="partnerStatCompleted">0</div></div>
+                <div class="bg-zinc-900 border border-white/10 rounded-2xl p-5"><div class="text-xs text-zinc-500 mb-1">Freelancers</div><div class="text-3xl font-bold" id="partnerStatFreelancers">0</div></div>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-6 mb-6">
@@ -298,7 +302,6 @@
                 <textarea id="cExp" placeholder="Your sales experience..." rows="3" class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/10 focus:border-violet-500/50 focus:outline-none text-"></textarea>
             </div>
             <button onclick="submitCloser()" class="w-full mt-6 px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 font-semibold hover:opacity-90 transition">Submit Application</button>
-            <p class="text- text-zinc-500 text-center mt-4">Admin will review and approve</p>
         </div>
     </div>
 
@@ -321,7 +324,6 @@
                 <textarea id="dExp" placeholder="Your experience..." rows="3" class="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:outline-none text-"></textarea>
             </div>
             <button onclick="submitDelivery()" class="w-full mt-6 px-6 py-3.5 rounded-xl bg-emerald-500 text-black font-semibold hover:bg-emerald-400 transition">Submit Application</button>
-            <p class="text- text-zinc-500 text-center mt-4">Admin will review and approve</p>
         </div>
     </div>
 
@@ -336,90 +338,4 @@
                 if (!localStorage.getItem('ch_users')) localStorage.setItem('ch_users', '[]');
                 if (!localStorage.getItem('ch_leads')) localStorage.setItem('ch_leads', '[]');
                 if (!localStorage.getItem('ch_projects')) localStorage.setItem('ch_projects', '[]');
-                if (!localStorage.getItem('ch_freelancers')) localStorage.setItem('ch_freelancers', '[]');
-                if (!localStorage.getItem('ch_counters')) localStorage.setItem('ch_counters', JSON.stringify({ closer: 1000, partner: 2000, lead: 3000, project: 4000 }));
-            },
-            get(key) { return JSON.parse(localStorage.getItem(key) || '[]'); },
-            set(key, val) { localStorage.setItem(key, JSON.stringify(val)); },
-            getAdmin() { return JSON.parse(localStorage.getItem('ch_admin')); },
-            setAdmin(data) { localStorage.setItem('ch_admin', JSON.stringify(data)); },
-            getNextId(type) {
-                const counters = JSON.parse(localStorage.getItem('ch_counters'));
-                counters[type]++;
-                localStorage.setItem('ch_counters', JSON.stringify(counters));
-                return counters[type];
-            },
-            generatePassword() { return 'CH' + Math.floor(100000 + Math.random() * 900000); }
-        };
-
-        DB.init();
-
-        let currentUser = null;
-        let currentRole = null;
-
-        // ===== AUTH =====
-        function openLoginModal() { document.getElementById('loginModal').classList.remove('hidden'); document.getElementById('loginModal').classList.add('flex'); }
-        function closeLoginModal() { document.getElementById('loginModal').classList.add('hidden'); document.getElementById('loginModal').classList.remove('flex'); }
-
-        function handleLogin() {
-            const user = document.getElementById('loginUser').value;
-            const pass = document.getElementById('loginPass').value;
-
-            const admin = DB.getAdmin();
-            if (user === admin.username && pass === admin.password) {
-                currentUser = admin;
-                currentRole = 'admin';
-                showDashboard('admin');
-                return;
-            }
-
-            const users = DB.get('ch_users');
-            const found = users.find(u => u.username === user && u.password === pass && u.status === 'approved');
-            if (found) {
-                currentUser = found;
-                currentRole = found.role;
-                showDashboard(found.role);
-                return;
-            }
-
-            alert('Invalid credentials or account not approved yet');
-        }
-
-        function logout() {
-            currentUser = null;
-            currentRole = null;
-            document.getElementById('dashboardView').classList.add('hidden-section');
-            document.getElementById('mainSite').classList.remove('hidden-section');
-            closeLoginModal();
-        }
-
-        function showDashboard(role) {
-            closeLoginModal();
-            document.getElementById('mainSite').classList.add('hidden-section');
-            document.getElementById('dashboardView').classList.remove('hidden-section');
-
-            document.getElementById('adminDashboard').classList.add('hidden-section');
-            document.getElementById('closerDashboard').classList.add('hidden-section');
-            document.getElementById('partnerDashboard').classList.add('hidden-section');
-
-            document.getElementById('loggedUserName').textContent = currentUser.name || currentUser.username;
-
-            if (role === 'admin') {
-                document.getElementById('userRoleDisplay').textContent = 'Admin';
-                document.getElementById('adminDashboard').classList.remove('hidden-section');
-                loadAdminDashboard();
-            } else if (role === 'closer') {
-                document.getElementById('userRoleDisplay').textContent = 'Closer';
-                document.getElementById('closerDashboard').classList.remove('hidden-section');
-                loadCloserDashboard();
-            } else if (role === 'partner') {
-                document.getElementById('userRoleDisplay').textContent = 'Delivery Partner';
-                document.getElementById('partnerDashboard').classList.remove('hidden-section');
-                loadPartnerDashboard();
-            }
-        }
-
-        // ===== FORMS =====
-        function openCloserPopup() { document.getElementById('closerPopup').classList.remove('hidden'); document.getElementById('closerPopup').classList.add('flex'); }
-        function closeCloserPopup() { document.getElementById('closerPopup').classList.add('hidden'); document.getElementById('closerPopup').classList.remove('flex'); }
-        function openDeliveryPopup() { document.getElementById('deliveryPopup').
+                if (!localStorage.get
